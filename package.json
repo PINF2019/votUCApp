@@ -71,8 +71,12 @@
     }
   },
   "lint-staged": {
-    "*.{ts, tsx}": [
-      "eslint **/*.{tsx,ts} --fix",
+    "*.+(ts|tsx)": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.+(json|less|md|yml)": [
+      "prettier --write",
       "git add"
     ]
   }
