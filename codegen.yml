@@ -1,0 +1,23 @@
+overwrite: true
+schema:
+  - "http://localhost:7000/graphql"
+documents: "graphql/*.gql"
+generates:
+  generated/hooks.ts:
+    plugins:
+      - add: /* THIS IS A GENERATED FILE - DO NOT MODIFY */
+      - add: /* eslint-disable */
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      scalars:
+        DateTime: string
+      reactApolloVersion: 3
+      gqlImport: "@apollo/client#gql"
+      apolloReactCommonImportFrom: "@apollo/client"
+      apolloReactHooksImportFrom: "@apollo/client"
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      preResolveTypes: true
