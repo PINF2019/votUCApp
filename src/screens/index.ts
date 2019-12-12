@@ -1,4 +1,5 @@
-import Home from './Home'
-import Login from './Login'
-
-export { Home, Login }
+export { default as Home } from './Home'
+export { default as Login } from './Login'
+export { default as Census } from './Census'
+export { default as Statistics } from './Statistics'
+export { default as Results } from './Results'
