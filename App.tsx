@@ -15,15 +15,19 @@ import { NavigationNativeContainer } from '@react-navigation/native'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import React from 'react'
+import { ApolloProvider } from '@apollo/client'
 import { AppStack } from './src/navigator'
+import client from './src/utils/apollo-client'
 
 const App = (): React.ReactFragment => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider mapping={mapping} theme={theme}>
-      <NavigationNativeContainer>
-        <AppStack />
-      </NavigationNativeContainer>
+      <ApolloProvider client={client}>
+        <NavigationNativeContainer>
+          <AppStack />
+        </NavigationNativeContainer>
+      </ApolloProvider>
     </ApplicationProvider>
   </>
 )

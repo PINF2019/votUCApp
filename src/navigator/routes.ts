@@ -1,11 +1,12 @@
 enum Routes {
   AUTH = 'auth',
-  SIGN_UP = 'signup',
+  LOGIN = 'login',
   RESET_PASSWORD = 'resetpassrord',
   HOME = 'home',
   STATISTICS = 'statistics',
   RESULTS = 'results',
-  CENSUS = 'cesus'
+  CENSUS = 'cesus',
+  WELCOME = 'welcome'
 }
 
 export default Routes
