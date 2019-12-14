@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { NavigationStackProp } from 'react-navigation-stack'
-import { Layout } from 'react-native-ui-kitten'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { Layout } from '@ui-kitten/components'
 
 type Props = {
-  navigation: NavigationStackProp
+  navigation: StackNavigationProp<any>
 }
 
 const Home = () => {

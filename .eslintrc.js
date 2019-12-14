@@ -38,6 +38,7 @@ module.exports = {
     }
   },
   rules: {
+    'import/extensions': [1, { png: 'always' }],
     'react/jsx-filename-extension': [
       2,
       {
@@ -47,6 +48,7 @@ module.exports = {
     'react/prefer-stateless-function': 1,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': [1, { exceptions: ['Icon'] }],
     'react-native/no-raw-text': [1, { skip: ['Button'] }],
     '@typescript-eslint/explicit-function-return-type': [
       0,
