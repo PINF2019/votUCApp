@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Formik } from 'formik'
 import { View, Image, ImageBackground, Linking } from 'react-native'
 import {
@@ -10,17 +10,13 @@ import {
   Text
 } from '@ui-kitten/components'
 import * as yup from 'yup'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
 import { useLoginMutation } from '../../generated/hooks'
-import { setAuthToken } from '../../utils/auth'
 import styles from './styles'
 import Routes from '../../navigator/routes'
 import fondo from '../../assets/background.jpg'
 import logo from '../../assets/votucaLogo.png'
-
-type Props = {
-  navigation: StackNavigationProp<any>
-}
+import { AuthContext } from '../../navigator/auth.stack'
 
 const validationLogin = yup.object().shape({
   uid: yup
@@ -31,8 +27,11 @@ const validationLogin = yup.object().shape({
   password: yup.string().required('Contraseña requerida')
 })
 
-const Login = (props: Props) => {
+const Login = () => {
+  const { signIn } = useContext(AuthContext)
   const [login, { loading }] = useLoginMutation()
+  const { navigate } = useNavigation()
+
   return (
     <Layout style={styles.layout}>
       <Formik
@@ -42,8 +41,8 @@ const Login = (props: Props) => {
           try {
             const { data } = await login({ variables: { input } })
             if (data && !loading) {
-              await setAuthToken(data.login.accessToken)
-              props.navigation.navigate(Routes.AUTH)
+              signIn(data.login.accessToken)
+              navigate(Routes.AUTH)
             }
           } catch (e) {
             const message = 'Usuario o Contraseña Incorrectos'
