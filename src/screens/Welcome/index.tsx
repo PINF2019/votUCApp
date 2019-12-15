@@ -1,20 +1,16 @@
 import React from 'react'
 import { View, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import { Text } from '@ui-kitten/components'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 import fondo from '../../assets/background.jpg'
 import logo from '../../assets/votucaLogo.png'
 
-type Props = {
-  navigation: StackNavigationProp<any>
-}
+const Welcome = () => {
+  const { navigate } = useNavigation()
 
-const Welcome = (props: Props) => {
   return (
-    <TouchableOpacity
-      style={styles.layout}
-      onPress={() => props.navigation.navigate('auth')}>
+    <TouchableOpacity style={styles.layout} onPress={() => navigate('auth')}>
       <ImageBackground source={fondo} style={styles.container}>
         <View style={styles.titleContainer}>
           <Image style={styles.title} source={logo} />
