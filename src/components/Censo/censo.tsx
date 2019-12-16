@@ -4,7 +4,7 @@ import { List, ListItem } from 'react-native-ui-kitten'
 
 const renderItemAccessory = () => (
   <Image
-    source={require('./triangulo.png')}
+    source={require('../../assets/triangulo.png')}
     style={{ width: 25, height: 25 }}
   />
 )
