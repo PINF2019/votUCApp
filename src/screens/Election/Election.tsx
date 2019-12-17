@@ -3,23 +3,9 @@
 /* eslint-disable react-native/sort-styles */
 /* eslint-disable react-native/no-color-literals */
 /* eslint-disable react-native/no-inline-styles */
+import { Button, Radio, RadioGroup } from '@ui-kitten/components'
 import React from 'react'
-import {
-  Alert,
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView
-} from 'react-native'
-import {
-  List,
-  ListItem,
-  CheckBox,
-  Button,
-  Radio,
-  RadioGroup
-} from 'react-native-ui-kitten'
+import { Alert, SafeAreaView, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import styles from './styles'
 
