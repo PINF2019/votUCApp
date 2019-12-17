@@ -1,36 +1,33 @@
-import React, { useState } from 'react'
-import { Alert, Image, StyleSheet, View, Text } from 'react-native'
-import { List, ListItem } from 'react-native-ui-kitten'
-import Styles from './style'
+import { List, ListItem } from '@ui-kitten/components'
+import React from 'react'
+import { Alert, Image, View } from 'react-native'
+import image from '../../assets/triangulo.png'
+import Title from '../Title'
+import styles from './style'
 
-const renderItemAccessory = () => (
-  <Image
-    source={require('../../assets/triangulo.png')}
-    style={{ width: 25, height: 25 }}
+export type CensoProps = {
+  title: string
+  data: any
+}
+
+const renderItemAccessory = () => <Image source={image} style={styles.image} />
+
+const RenderItem = ({ item: { title, description } }) => (
+  <ListItem
+    title="sasfdfss"
+    description={description}
+    onPress={() => Alert.alert(`Button for ${title}`)}
+    accessory={renderItemAccessory}
+    style={styles.listItem}
+    titleStyle={styles.titleItem}
+    descriptionStyle={styles.descriptionItem}
   />
 )
 
-const RenderItem = ({ item }) => {
-  return (
-    <ListItem
-      title={`${item.title}`}
-      description={`${item.description}`}
-      onPress={() => Alert.alert(`Button for ${item.title}`)}
-      accessory={renderItemAccessory}
-      style={Styles.listItem}
-      titleStyle={Styles.titleItem}
-      descriptionStyle={Styles.descriptionItem}
-    />
-  )
-}
-
-const Censo = ({ title, data }) => (
+const Censo = ({ title, data }: CensoProps) => (
   <>
-    <View style={Styles.titleView}>
-      <Text style={Styles.palito}>|</Text>
-      <Text style={Styles.title}>{title}</Text>
-    </View>
-    <View style={Styles.spaceList}>
+    <Title title={title} subtitle="" />
+    <View style={styles.spaceList}>
       <List data={data} renderItem={RenderItem} />
     </View>
   </>

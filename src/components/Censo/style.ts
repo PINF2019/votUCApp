@@ -6,9 +6,11 @@ const shadowList = 'rgba(0, 0, 0, 0.1)'
 
 const styles = StyleSheet.create({
   container: { flex: 1, flexDirection: 'column', alignItems: 'center' },
-
   descriptionItem: { color: textColor },
-
+  image: {
+    height: 25,
+    width: 25
+  },
   listItem: {
     alignSelf: 'center',
     borderRadius: 10,
@@ -20,18 +22,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     width: '85%'
   },
-
-  palito: {
-    color: textColor,
-    fontFamily: 'sans-serif-light',
-    fontSize: 82,
-    marginLeft: '10%'
-  },
-
   spaceList: {
     flex: 24
   },
-
   title: {
     alignSelf: 'flex-start',
     color: textColor,
@@ -41,9 +34,7 @@ const styles = StyleSheet.create({
     marginRight: '5%',
     marginTop: '7%'
   },
-
   titleItem: { color: textColor, fontSize: 15, fontWeight: 'bold' },
-
   titleView: { flex: 5, flexDirection: 'row', marginRight: '10%' }
 })
 

@@ -1,13 +1,19 @@
-import { Divider, Layout, Text } from '@ui-kitten/components'
+import { Divider, Layout } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { MenuIcon } from '../../assets/icons'
+import Censo from '../../components/Censo/censo'
 import {
   SafeAreaLayout,
   SaveAreaInset
 } from '../../components/safe-area-layout'
 import { Toolbar } from '../../components/Toolbar'
 import { CensusScreenProps } from '../../navigator/home.stack'
+
+const data = [
+  { title: 'lalalasdasal', description: 'lalalla' },
+  { title: 'lalaasdaslal', description: 'lalaasdassdlla' }
+]
 
 const Census = ({ navigation }: CensusScreenProps) => {
   return (
@@ -19,7 +25,7 @@ const Census = ({ navigation }: CensusScreenProps) => {
       />
       <Divider />
       <Layout style={styles.container}>
-        <Text category="h1">Census</Text>
+        <Censo title="¿Que censo desea conocer?" data={data} />
       </Layout>
     </SafeAreaLayout>
   )
