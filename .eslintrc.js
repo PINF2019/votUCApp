@@ -38,7 +38,7 @@ module.exports = {
     }
   },
   rules: {
-    'import/extensions': [1, { png: 'always', svg: 'always', jpg: 'always' }],
+    'import/extensions': [1, { png: 'always', svg: 'always', jpg: 'always',jpeg: 'always' }],
     'react/jsx-filename-extension': [
       2,
       {

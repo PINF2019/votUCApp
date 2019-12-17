@@ -2,7 +2,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import authLink from './auth'
 
 const httpLink = createHttpLink({
-  uri: 'http://votuca.krosf.com:7000/graphql'
+  uri: 'http://10.182.106.145:7000/graphql'
 })
 
 const client = new ApolloClient({
