@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 
-const textColor = '#1C5F94'
+const textColor = '#345B96'
+const listColor = '#F0F0F0'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     alignSelf: 'center',
+    backgroundColor: listColor,
     borderRadius: 10,
     elevation: 5,
     height: 70,

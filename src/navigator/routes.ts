@@ -1,11 +1,11 @@
 enum Routes {
   AUTH = 'auth',
   LOGIN = 'login',
-  RESET_PASSWORD = 'resetpassrord',
+  RESET_PASSWORD = 'resetpassword',
   HOME = 'home',
   STATISTICS = 'statistics',
   RESULTS = 'results',
-  CENSUS = 'cesus',
+  CENSUS = 'census',
   WELCOME = 'welcome',
   ELECTION = 'election'
 }

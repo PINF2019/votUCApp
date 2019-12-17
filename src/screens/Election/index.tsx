@@ -14,7 +14,6 @@ import Title from '../../components/Title'
 import Modal from '../../components/Modal'
 
 const title = 'Elección Delegados/as'
-
 const date = '13/11/19 - 20/11/19'
 
 const data = [
@@ -28,7 +27,6 @@ const Election = ({ navigation }: ElectionScreenProps) => {
     undefined
   )
   const [validate, setValidate] = useState(true)
-
   const [modal, setModal] = useState(false)
 
   const onCheckedChange = useCallback(

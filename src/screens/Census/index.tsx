@@ -1,6 +1,6 @@
-import { Divider, Layout, List, ListItem } from '@ui-kitten/components'
+import { Divider, Layout, ListItem } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet, Alert, Image, View } from 'react-native'
+import { Alert, Image, View } from 'react-native'
 import { MenuIcon } from '../../assets/icons'
 import {
   SafeAreaLayout,
@@ -13,7 +13,8 @@ import styles from './style'
 import image from '../../assets/triangulo.png'
 
 export type CensoProps = {
-  item: any
+  title: string
+  description: string
 }
 
 const data = [
@@ -22,18 +23,6 @@ const data = [
 ]
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
-
-const RenderItem = ({ item }) => (
-  <ListItem
-    title={item.title}
-    description={item.description}
-    onPress={() => Alert.alert(`Button for ${item.title}`)}
-    accessory={renderItemAccessory}
-    style={styles.listItem}
-    titleStyle={styles.titleItem}
-    descriptionStyle={styles.descriptionItem}
-  />
-)
 
 const Census = ({ navigation }: CensusScreenProps) => {
   return (
@@ -47,7 +36,18 @@ const Census = ({ navigation }: CensusScreenProps) => {
       <Layout style={styles.container}>
         <Title title="¿Qué censo desea conocer?" subtitle="" />
         <View style={styles.spaceList}>
-          <List data={data} renderItem={RenderItem} />
+          {data.map((d, idk) => (
+            <ListItem
+              key={idk}
+              title={d.title}
+              description={d.description}
+              onPress={() => Alert.alert(`Button for ${d.title}`)}
+              accessory={renderItemAccessory}
+              style={styles.listItem}
+              titleStyle={styles.titleItem}
+              descriptionStyle={styles.descriptionItem}
+            />
+          ))}
         </View>
       </Layout>
     </SafeAreaLayout>
