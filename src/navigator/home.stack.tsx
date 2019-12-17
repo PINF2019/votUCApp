@@ -16,16 +16,19 @@ import { Census, Results, Statistics } from '../screens'
 import Routes from './routes'
 import HomeTabBar from '../screens/Home/TabBar'
 import HomeDrawer from '../screens/Home/Drawer'
+import Election from '../screens/Election'
 
 type HomeDrawerNavigatorParams = {
   [Routes.HOME]: undefined
   [Routes.CENSUS]: undefined
+  [Routes.ELECTION]: undefined
 }
 
 type HomeBottomTabsNavigatorParams = {
   [Routes.CENSUS]: undefined
   [Routes.RESULTS]: undefined
   [Routes.STATISTICS]: undefined
+  [Routes.ELECTION]: undefined
 }
 
 export type TodoTabNavigationProp = CompositeNavigationProp<
@@ -46,6 +49,11 @@ export interface CensusScreenProps {
   route: RouteProp<HomeDrawerNavigatorParams, Routes.CENSUS>
 }
 
+export interface ElectionScreenProps {
+  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.ELECTION>
+  route: RouteProp<HomeDrawerNavigatorParams, Routes.ELECTION>
+}
+
 const Drawer = createDrawerNavigator<HomeDrawerNavigatorParams>()
 const BottomTab = createBottomTabNavigator<HomeBottomTabsNavigatorParams>()
 
@@ -61,10 +69,10 @@ const HomeBottomNavigator = (): React.ReactElement => (
       }}
     />
     <BottomTab.Screen
-      name={Routes.RESULTS}
-      component={Results}
+      name={Routes.ELECTION}
+      component={Election}
       options={{
-        title: 'Resultados',
+        title: 'Elecciones',
         tabBarIcon: props => <Icon name="checkmark-circle-outline" {...props} />
       }}
     />

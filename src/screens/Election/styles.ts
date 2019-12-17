@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native'
 
+const colorOrange = '#345B96'
+const colorBlue = '#FFA500'
+const radioBackground = '#E5E5E5'
+const shadowColor = 'rgba(0, 0, 0, 0.15)'
+
 const styles = StyleSheet.create({
   bottomButton: {
     flex: 2,
@@ -8,59 +13,42 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   buttonLeft: {
-    backgroundColor: '#345B96',
+    backgroundColor: colorOrange,
     marginTop: 10
   },
   buttonRight: {
-    backgroundColor: '#FFA500',
+    backgroundColor: colorBlue,
     marginTop: 10
   },
-  date: {
-    color: '#345B96',
-    fontSize: 19
-  },
-  elec: {
-    color: '#345B96',
+  choice: {
+    color: colorOrange,
     flex: 1,
-    fontSize: 27,
+    fontSize: 25,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
-    marginLeft: '5%'
+    marginLeft: '6%'
   },
   listView: {
     alignContent: 'stretch',
     flex: 8
   },
-  palito: {
-    color: '#345B96',
-    fontSize: 82,
-    marginTop: '15%'
-  },
   radio: {
     borderRadius: 6,
     margin: 33,
-    marginBottom: -10,
+    marginBottom: 10,
     padding: 20,
-    backgroundColor: '#E5E5E5',
-    shadowColor: 'rgba(0, 0, 0, 0.15)',
+    backgroundColor: radioBackground,
+    shadowColor,
     shadowOffset: { width: 5, height: 7 },
     shadowOpacity: 1
   },
-  title: {
-    color: '#345B96',
-    fontSize: 28,
+  radioTextStyle: {
+    color: colorOrange,
+    fontSize: 22,
     fontWeight: 'bold'
   },
-  titleView: {
-    flexDirection: 'row',
-    flex: 3,
-    // marginTop: '12%',
-    marginLeft: '5%'
-  },
-  titles: {
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    marginTop: '20%'
+  safeArea: {
+    flex: 1
   }
 })
 export default styles

@@ -50,6 +50,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': [1, { exceptions: ['Icon'] }],
     'react-native/no-raw-text': [1, { skip: ['Button'] }],
+    'react/no-array-index-key':0,
     '@typescript-eslint/explicit-function-return-type': [
       0,
       {
