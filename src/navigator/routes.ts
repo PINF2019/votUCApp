@@ -6,7 +6,8 @@ enum Routes {
   STATISTICS = 'statistics',
   RESULTS = 'results',
   CENSUS = 'cesus',
-  WELCOME = 'welcome'
+  WELCOME = 'welcome',
+  ELECTION = 'election'
 }
 
 export default Routes

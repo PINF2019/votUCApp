@@ -1,8 +1,8 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text } from '@ui-kitten/components'
 
 const Results = () => {
-  return <Text>Results</Text>
+  return <Text>Hola</Text>
 }
 
 export default Results

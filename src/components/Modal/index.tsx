@@ -5,25 +5,26 @@ import {
   Modal as KModal,
   Text
 } from '@ui-kitten/components'
-import React from 'react'
-import { ImageSourcePropType } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import styles from './style'
+import image from '../../assets/logo_mail.png'
+import { Routes } from '../../navigator'
 
 type ModalProps = {
   title: string
   subtitle: string
-  image: ImageSourcePropType
+  visible: boolean
 }
 
-const Modal = ({ title, subtitle, image }: ModalProps) => {
-  const [visible, setVisible] = React.useState(false)
-
-  const toggleModal = () => {
-    setVisible(!visible)
-  }
-
+const Modal = ({ title, subtitle, visible }: ModalProps) => {
+  const [isVisible, setVisible] = useState(visible)
+  useEffect(() => {
+    setVisible(visible)
+  }, [visible])
+  const { navigate } = useNavigation()
   return (
-    <KModal allowBackdrop backdropStyle={styles.backdrop} visible={visible}>
+    <KModal allowBackdrop backdropStyle={styles.backdrop} visible={isVisible}>
       <Layout level="3" style={styles.modalContainer}>
         <Text style={styles.text} category="h5">
           {subtitle}
@@ -33,7 +34,10 @@ const Modal = ({ title, subtitle, image }: ModalProps) => {
         </Text>
         <Avatar style={styles.logo} shape="square" source={image} />
         <Button
-          onPress={toggleModal}
+          onPress={() => {
+            setVisible(false)
+            navigate(Routes.CENSUS)
+          }}
           style={styles.button}
           status="warning"
           size="giant">
