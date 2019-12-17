@@ -1,22 +1,22 @@
-import React, { useContext } from 'react'
-import { Formik } from 'formik'
-import { View, Image, ImageBackground, Linking } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import {
   Button,
   Input,
-  Spinner,
-  Modal,
   Layout,
+  Modal,
+  Spinner,
   Text
 } from '@ui-kitten/components'
+import { Formik } from 'formik'
+import React from 'react'
+import { Image, ImageBackground, Linking, View } from 'react-native'
 import * as yup from 'yup'
-import { useNavigation } from '@react-navigation/native'
-import { useLoginMutation } from '../../generated/hooks'
-import styles from './styles'
-import Routes from '../../navigator/routes'
 import fondo from '../../assets/background.jpg'
 import logo from '../../assets/votucaLogo.png'
-import { AuthContext } from '../../navigator/auth.stack'
+import { useAuth } from '../../context/auth'
+import { useLoginMutation } from '../../generated/hooks'
+import Routes from '../../navigator/routes'
+import styles from './styles'
 
 const validationLogin = yup.object().shape({
   uid: yup
@@ -28,7 +28,7 @@ const validationLogin = yup.object().shape({
 })
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useAuth()
   const [login, { loading }] = useLoginMutation()
   const { navigate } = useNavigation()
 
