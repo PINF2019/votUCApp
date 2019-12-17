@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native'
 
 const textColor = '#1C5F94'
 
-const shadowList = 'rgba(0, 0, 0, 0.1)'
-
 const styles = StyleSheet.create({
-  container: { flex: 1, flexDirection: 'column', alignItems: 'center' },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   descriptionItem: { color: textColor },
   image: {
     height: 25,
@@ -17,10 +18,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     height: 70,
     margin: 7,
-    shadowColor: shadowList,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.8,
     width: '85%'
+  },
+  safeArea: {
+    flex: 1
   },
   spaceList: {
     flex: 24
