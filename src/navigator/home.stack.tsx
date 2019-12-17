@@ -12,23 +12,49 @@ import {
 import React from 'react'
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { Icon } from '@ui-kitten/components'
-import { Census, Results, Statistics } from '../screens'
+import { Census } from '../screens'
 import Routes from './routes'
 import HomeTabBar from '../screens/Home/TabBar'
 import HomeDrawer from '../screens/Home/Drawer'
-import Election from '../screens/Election'
+import VotesNavigator from './votes.stack'
+import MenuResults from '../screens/MenuResults/MenuResults'
+import CensusNavigator from './census.stack'
+import ResultsNavigator from './results.stack'
 
 type HomeDrawerNavigatorParams = {
   [Routes.HOME]: undefined
   [Routes.CENSUS]: undefined
-  [Routes.ELECTION]: undefined
+  [Routes.VOTES]: undefined
+  [Routes.RESULTS]: {
+    title: string
+  }
+  [Routes.MENU_RESULTS]: undefined
+  [Routes.CENSUS_RESULTS]: {
+    title: string
+  }
+  [Routes.ELECTION]: {
+    title: string
+    date: string
+    data: any[]
+  }
 }
 
 type HomeBottomTabsNavigatorParams = {
   [Routes.CENSUS]: undefined
-  [Routes.RESULTS]: undefined
   [Routes.STATISTICS]: undefined
-  [Routes.ELECTION]: undefined
+  [Routes.VOTES]: undefined
+  [Routes.RESULTS]: {
+    title: string
+  }
+  [Routes.MENU_RESULTS]: undefined
+  [Routes.CENSUS_RESULTS]: {
+    title: string
+  }
+  [Routes.ELECTION]: {
+    title: string
+    date: string
+    data: any[]
+  }
 }
 
 export type TodoTabNavigationProp = CompositeNavigationProp<
@@ -44,14 +70,41 @@ export type DrawerHomeScreenProps = DrawerContentComponentProps & {
   navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.HOME>
 }
 
+export interface CensusResultsScreenProps {
+  navigation: DrawerNavigationProp<
+    HomeDrawerNavigatorParams,
+    Routes.CENSUS_RESULTS
+  >
+  route: RouteProp<HomeDrawerNavigatorParams, Routes.CENSUS_RESULTS>
+}
+
 export interface CensusScreenProps {
-  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.CENSUS>
+  navigation: CompositeNavigationProp<
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.CENSUS>,
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.CENSUS_RESULTS>
+  >
   route: RouteProp<HomeDrawerNavigatorParams, Routes.CENSUS>
 }
 
-export interface ElectionScreenProps {
+export interface ParticularElectionScreenProps {
   navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.ELECTION>
   route: RouteProp<HomeDrawerNavigatorParams, Routes.ELECTION>
+}
+
+export interface ResultsScreenProps {
+  navigation: CompositeNavigationProp<
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>,
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.RESULTS>
+  >
+  route: RouteProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>
+}
+
+export interface VotesScreenProps {
+  navigation: CompositeNavigationProp<
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.VOTES>,
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.ELECTION>
+  >
+  route: RouteProp<HomeDrawerNavigatorParams, Routes.VOTES>
 }
 
 const Drawer = createDrawerNavigator<HomeDrawerNavigatorParams>()
@@ -62,25 +115,25 @@ const HomeBottomNavigator = (): React.ReactElement => (
   <BottomTab.Navigator tabBar={HomeTabBar}>
     <BottomTab.Screen
       name={Routes.CENSUS}
-      component={Census}
+      component={CensusNavigator}
       options={{
         title: 'Censo',
         tabBarIcon: props => <Icon name="layers-outline" {...props} />
       }}
     />
     <BottomTab.Screen
-      name={Routes.ELECTION}
-      component={Election}
+      name={Routes.VOTES}
+      component={VotesNavigator}
       options={{
-        title: 'Elecciones',
+        title: 'Votaciones',
         tabBarIcon: props => <Icon name="checkmark-circle-outline" {...props} />
       }}
     />
     <BottomTab.Screen
-      name={Routes.STATISTICS}
-      component={Statistics}
+      name={Routes.MENU_RESULTS}
+      component={ResultsNavigator}
       options={{
-        title: 'Estadisticas',
+        title: 'Resultados',
         tabBarIcon: props => <Icon name="pie-chart-2" {...props} />
       }}
     />

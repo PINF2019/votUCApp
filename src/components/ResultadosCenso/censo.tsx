@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { List, ListItem } from 'react-native-ui-kitten'
+import { List } from '@ui-kitten/components'
+
+const color = '#1C5F94'
+const white = 'white'
 
 const stylesCenso = StyleSheet.create({
   palito: {
-    color: '#1C5F94',
-    fontFamily: 'sans-serif-light',
+    color,
     fontSize: 82,
     marginLeft: '10%'
   },
   subtitleText: {
-    color: '#1C5F94',
+    color,
     flex: 1,
     flexShrink: 1,
     fontSize: 20,
@@ -19,19 +21,18 @@ const stylesCenso = StyleSheet.create({
     marginTop: '3%'
   },
   textSecretary: {
-    color: '#1C5F94',
+    color,
     fontSize: 20,
     marginLeft: '13%'
   },
   textVotant: {
-    color: '#1C5F94',
+    color,
     flexShrink: 1,
     fontSize: 20
   },
   title: {
     alignSelf: 'flex-start',
-    color: '#1C5F94',
-    fontFamily: 'notoserif',
+    color,
     fontSize: 30,
     fontWeight: 'bold',
     marginRight: '5%',
@@ -41,14 +42,14 @@ const stylesCenso = StyleSheet.create({
     flex: 2,
     flexDirection: 'row',
     marginRight: '10%',
-    backgroundColor: 'white',
+    backgroundColor: white,
     marginBottom: '3%'
   },
   votantGeneralView: {
     flex: 8
   },
   votantView: {
-    backgroundColor: 'white',
+    backgroundColor: white,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: '10%',
@@ -61,7 +62,7 @@ const RenderVotante = ({ item }) => {
   return (
     <>
       <View style={stylesCenso.votantView}>
-        <Text style={stylesCenso.textVotant}>{item.Name}</Text>
+        <Text style={stylesCenso.textVotant}>{item.name}</Text>
       </View>
     </>
   )

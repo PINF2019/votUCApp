@@ -1,6 +1,7 @@
 import { Divider, Layout, ListItem } from '@ui-kitten/components'
 import React from 'react'
 import { Alert, Image, View } from 'react-native'
+import { navigate } from '@react-navigation/drawer/lib/typescript/core/src/CommonActions'
 import { MenuIcon } from '../../assets/icons'
 import {
   SafeAreaLayout,
@@ -11,6 +12,7 @@ import { CensusScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
 import styles from './style'
 import image from '../../assets/triangulo.png'
+import { Routes } from '../../navigator'
 
 export type CensoProps = {
   title: string
@@ -19,7 +21,8 @@ export type CensoProps = {
 
 const data = [
   { title: 'Elección Delegados/as', description: '13/01/19 - 20/02/19' },
-  { title: 'Elección Rector ESI', description: '13/01/19 - 20/03/19' }
+  { title: 'Elección Rectorado ESI', description: '13/01/19 - 20/03/19' },
+  { title: 'Elección Dirección ESI', description: '13/11/19 - 20/11/19' }
 ]
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
@@ -41,7 +44,11 @@ const Census = ({ navigation }: CensusScreenProps) => {
               key={idk}
               title={d.title}
               description={d.description}
-              onPress={() => Alert.alert(`Button for ${d.title}`)}
+              onPress={() =>
+                navigation.navigate(Routes.CENSUS_RESULTS, {
+                  title: d.title
+                })
+              }
               accessory={renderItemAccessory}
               style={styles.listItem}
               titleStyle={styles.titleItem}

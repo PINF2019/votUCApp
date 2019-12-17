@@ -11,7 +11,7 @@ import {
   TopNavigationActionElement,
   TopNavigationProps
 } from '@ui-kitten/components'
-import { BackIcon, MoreVerticalIcon } from '../assets/icons'
+import { MoreVerticalIcon } from '../assets/icons'
 
 export type ToolbarMenu = OverflowMenuItemType[]
 
@@ -60,7 +60,7 @@ export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
   )
 
   const renderBackAction = (): TopNavigationActionElement => (
-    <TopNavigationAction icon={backIcon || BackIcon} onPress={onBackPress} />
+    <TopNavigationAction icon={backIcon || Backcon} onPress={onBackPress} />
   )
 
   return (
