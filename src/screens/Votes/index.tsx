@@ -6,6 +6,15 @@ import styles from './styles'
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
 
+export type CensoProps = {
+  item: any
+}
+
+const data = [
+  { title: 'Elección Delegados/as', description: '13/01/19 - 20/02/19' },
+  { title: 'Elección Rector ESI', description: '13/01/19 - 20/03/19' }
+]
+
 const RenderItem = ({ item }) => {
   return (
     <ListItem
@@ -20,10 +29,10 @@ const RenderItem = ({ item }) => {
   )
 }
 
-const Votaciones = ({ title, data }) => (
+const Votaciones = () => (
   <>
     <View style={styles.titleView}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>Votaciones Pendientes</Text>
     </View>
     <View style={styles.spaceList}>
       <List data={data} renderItem={RenderItem} />
