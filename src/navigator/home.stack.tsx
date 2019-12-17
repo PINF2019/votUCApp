@@ -12,11 +12,12 @@ import {
 import React from 'react'
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { Icon } from '@ui-kitten/components'
-import { Census, Results, Statistics } from '../screens'
+import { Census } from '../screens'
 import Routes from './routes'
 import HomeTabBar from '../screens/Home/TabBar'
 import HomeDrawer from '../screens/Home/Drawer'
 import Election from '../screens/Election'
+import MenuResults from '../screens/MenuResults'
 
 type HomeDrawerNavigatorParams = {
   [Routes.HOME]: undefined
@@ -26,8 +27,8 @@ type HomeDrawerNavigatorParams = {
 
 type HomeBottomTabsNavigatorParams = {
   [Routes.CENSUS]: undefined
+  [Routes.MENU_RESULTS]: undefined
   [Routes.RESULTS]: undefined
-  [Routes.STATISTICS]: undefined
   [Routes.ELECTION]: undefined
 }
 
@@ -77,10 +78,10 @@ const HomeBottomNavigator = (): React.ReactElement => (
       }}
     />
     <BottomTab.Screen
-      name={Routes.STATISTICS}
-      component={Statistics}
+      name={Routes.MENU_RESULTS}
+      component={MenuResults}
       options={{
-        title: 'Estadisticas',
+        title: 'Resultados',
         tabBarIcon: props => <Icon name="pie-chart-2" {...props} />
       }}
     />

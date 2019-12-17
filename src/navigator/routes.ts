@@ -5,6 +5,7 @@ enum Routes {
   HOME = 'home',
   STATISTICS = 'statistics',
   RESULTS = 'results',
+  MENU_RESULTS = 'menu_results',
   CENSUS = 'census',
   WELCOME = 'welcome',
   ELECTION = 'election'

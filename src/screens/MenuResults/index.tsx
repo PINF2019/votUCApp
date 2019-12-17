@@ -1,6 +1,14 @@
-import React, { useState } from 'react'
-import { Alert, Image, View, Text } from 'react-native'
-import { List, ListItem } from '@ui-kitten/components'
+import { Divider, Layout, ListItem } from '@ui-kitten/components'
+import React from 'react'
+import { Alert, Image, View } from 'react-native'
+import { MenuIcon } from '../../assets/icons'
+import {
+  SafeAreaLayout,
+  SaveAreaInset
+} from '../../components/safe-area-layout'
+import { Toolbar } from '../../components/Toolbar'
+import { CensusScreenProps } from '../../navigator/home.stack'
+import Title from '../../components/Title'
 import styles from './styles'
 import image from '../../assets/triangulo.png'
 
@@ -15,30 +23,32 @@ const data = [
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
 
-const RenderItem = ({ item }) => {
-  return (
-    <ListItem
-      title={`${item.title}`}
-      description={`${item.description}`}
-      onPress={() => Alert.alert(`Button for ${item.title}`)}
-      accessory={renderItemAccessory}
-      style={styles.listItem}
-      titleStyle={styles.titleItem}
-      descriptionStyle={styles.descriptionItem}
-    />
-  )
-}
-
 const Resultados = () => (
-  <>
-    <View style={styles.titleView}>
-      <Text style={styles.palito}>|</Text>
-      <Text style={styles.title}>¿Qué resultados desea conocer?</Text>
-    </View>
-    <View style={styles.spaceList}>
-      <List data={data} renderItem={RenderItem} />
-    </View>
-  </>
+  <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
+    <Toolbar
+      title="Resultados"
+      backIcon={MenuIcon}
+      onBackPress={() => Alert.alert('heyy') /* {navigation.toggleDrawer} */}
+    />
+    <Divider />
+    <Layout style={styles.container}>
+      <Title title="¿Qué resultados desea conocer?" subtitle="" />
+      <View style={styles.spaceList}>
+        {data.map((d, idk) => (
+          <ListItem
+            key={idk}
+            title={d.title}
+            description={d.description}
+            onPress={() => Alert.alert(`Button for ${d.title}`)}
+            accessory={renderItemAccessory}
+            style={styles.listItem}
+            titleStyle={styles.titleItem}
+            descriptionStyle={styles.descriptionItem}
+          />
+        ))}
+      </View>
+    </Layout>
+  </SafeAreaLayout>
 )
 
 export default Resultados
