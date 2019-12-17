@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'flex-start',
     flexDirection: 'column',
+    marginRight: '10%',
     marginTop: '6%'
   }
 })

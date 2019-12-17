@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 const colorOrange = '#345B96'
 const colorBlue = '#FFA500'
 const radioBackground = '#E5E5E5'
-const shadowColor = 'rgba(0, 0, 0, 0.15)'
 
 const styles = StyleSheet.create({
   bottomButton: {
@@ -38,13 +37,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 20,
     backgroundColor: radioBackground,
-    shadowColor,
-    shadowOffset: { width: 5, height: 7 },
-    shadowOpacity: 1
+    elevation: 5
   },
   radioTextStyle: {
     color: colorOrange,
-    fontSize: 22,
+    fontSize: 19,
     fontWeight: 'bold'
   },
   safeArea: {
