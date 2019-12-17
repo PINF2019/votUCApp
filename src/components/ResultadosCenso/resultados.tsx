@@ -1,49 +1,46 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { List, ListItem } from 'react-native-ui-kitten'
+import { List } from '@ui-kitten/components'
+
+const white = 'white'
+const color = '#1C5F94'
 
 const styles = StyleSheet.create({
   candidateView: {
-    backgroundColor: 'white',
+    backgroundColor: white,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: '10%',
     marginRight: '15%',
     padding: '3%'
   },
-
   candidatesView: {
     flex: 8
   },
-
   container: { flex: 1, flexDirection: 'column', alignItems: 'center' },
-
   palito: {
-    color: '#1C5F94',
+    color,
     fontFamily: 'sans-serif-light',
     fontSize: 82,
     marginLeft: '10%'
   },
-
   textCandidate: {
-    color: '#1C5F94',
+    color,
     flexShrink: 1,
     fontSize: 20
   },
-
   textFirstCandidate: {
     color: 'orange',
     fontSize: 20
   },
-
   textPercentage: {
-    color: '#1C5F94',
+    color,
     fontSize: 20
   },
 
   title: {
     alignSelf: 'flex-start',
-    color: '#1C5F94',
+    color,
     fontFamily: 'notoserif',
     fontSize: 30,
     fontWeight: 'bold',
@@ -55,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection: 'row',
     marginRight: '10%',
-    backgroundColor: 'white'
+    backgroundColor: white
   }
 })
 

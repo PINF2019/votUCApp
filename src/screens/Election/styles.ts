@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const colorOrange = '#345B96'
 const colorBlue = '#FFA500'
-const radioBackground = '#E5E5E5'
-const shadowColor = 'rgba(0, 0, 0, 0.15)'
+const radioBackground = '#F0F0F0'
 
 const styles = StyleSheet.create({
   bottomButton: {
@@ -26,21 +25,20 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
-    marginLeft: '6%'
+    marginLeft: '6%',
+    paddingTop: 5
   },
   listView: {
     alignContent: 'stretch',
     flex: 8
   },
   radio: {
-    borderRadius: 6,
+    borderRadius: 10,
     margin: 33,
     marginBottom: 10,
     padding: 20,
     backgroundColor: radioBackground,
-    shadowColor,
-    shadowOffset: { width: 5, height: 7 },
-    shadowOpacity: 1
+    elevation: 5
   },
   radioTextStyle: {
     color: colorOrange,
@@ -49,6 +47,12 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1
+  },
+  titleContainer: {
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    marginRight: '18%',
+    marginTop: '6%'
   }
 })
 export default styles
