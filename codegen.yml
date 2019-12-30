@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - 'http://localhost:7000/graphql'
+  - 'http://votuca.krosf.com:7000/graphql'
 documents: 'src/graphql/*.gql'
 generates:
   src/generated/hooks.ts:

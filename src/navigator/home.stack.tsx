@@ -12,12 +12,10 @@ import {
 import React from 'react'
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native'
 import { Icon } from '@ui-kitten/components'
-import { Census } from '../screens'
 import Routes from './routes'
 import HomeTabBar from '../screens/Home/TabBar'
 import HomeDrawer from '../screens/Home/Drawer'
 import VotesNavigator from './votes.stack'
-import MenuResults from '../screens/MenuResults/MenuResults'
 import CensusNavigator from './census.stack'
 import ResultsNavigator from './results.stack'
 
@@ -33,9 +31,7 @@ type HomeDrawerNavigatorParams = {
     title: string
   }
   [Routes.ELECTION]: {
-    title: string
-    date: string
-    data: any[]
+    id: string
   }
 }
 
@@ -51,9 +47,7 @@ type HomeBottomTabsNavigatorParams = {
     title: string
   }
   [Routes.ELECTION]: {
-    title: string
-    date: string
-    data: any[]
+    id: string
   }
 }
 

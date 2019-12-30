@@ -1,8 +1,8 @@
 import { Divider, ListItem, Text } from '@ui-kitten/components'
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
+import moment from 'moment'
 import { MenuIcon } from '../../assets/icons'
-// import styles from './styles'
 import image from '../../assets/triangulo.png'
 import {
   SafeAreaLayout,
@@ -11,21 +11,11 @@ import {
 import { Toolbar } from '../../components/Toolbar'
 import { Routes } from '../../navigator'
 import { VotesScreenProps } from '../../navigator/home.stack'
-
-const title = 'Elección Delegados/as'
-const date = '13/11/19 - 20/11/19'
-const electors = [
-  { name: 'Raúl Escribano Corrales' },
-  { name: 'Borja Romero Fernández' },
-  { name: 'Antonio José Sánchez Muñoz' }
-]
+import { useVotesQuery } from '../../generated/hooks'
+import Loading from '../../components/Loading'
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
 
-const data = [
-  { title: 'Elección Delegados/as', date: '13/01/19 - 20/02/19' },
-  { title: 'Elección Rector ESI', date: '13/01/19 - 20/03/19' }
-]
 const listColor = '#F0F0F0'
 const color = '#345B96'
 const styles = StyleSheet.create({
@@ -62,38 +52,49 @@ const styles = StyleSheet.create({
 })
 
 const Votes = ({ navigation }: VotesScreenProps) => {
+  const { data, loading } = useVotesQuery()
+
   return (
     <SafeAreaLayout style={styles.areaLayout} insets={SaveAreaInset.TOP}>
-      <Toolbar
-        title="Votaciones"
-        backIcon={MenuIcon}
-        onBackPress={navigation.toggleDrawer}
-      />
-      <Divider />
-      <View style={styles.container}>
-        <Text style={styles.title}>VOTACIONES PENDIENTES</Text>
-      </View>
-
-      <View style={styles.spaceList}>
-        {data.map((d, idk) => (
-          <ListItem
-            key={idk}
-            title={`${d.title}`}
-            description={`${d.date}`}
-            onPress={() => {
-              navigation.navigate(Routes.ELECTION, {
-                title: d.title,
-                date: d.date,
-                data: electors
-              })
-            }}
-            accessory={renderItemAccessory}
-            style={styles.listItem}
-            titleStyle={styles.titleItem}
-            descriptionStyle={styles.descriptionItem}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Toolbar
+            title="Votaciones"
+            backIcon={MenuIcon}
+            onBackPress={navigation.toggleDrawer}
           />
-        ))}
-      </View>
+          <Divider />
+          <View style={styles.container}>
+            <Text style={styles.title}>VOTACIONES PENDIENTES</Text>
+          </View>
+
+          <View style={styles.spaceList}>
+            {data &&
+              data.pendingElections.map((e, idk) => {
+                return (
+                  <ListItem
+                    key={idk}
+                    title={e.description}
+                    description={`${moment(e.start).format('L')} - ${moment(
+                      e.end
+                    ).format('L')}`}
+                    onPress={() => {
+                      navigation.navigate(Routes.ELECTION, {
+                        id: e.id
+                      })
+                    }}
+                    accessory={renderItemAccessory}
+                    style={styles.listItem}
+                    titleStyle={styles.titleItem}
+                    descriptionStyle={styles.descriptionItem}
+                  />
+                )
+              })}
+          </View>
+        </>
+      )}
     </SafeAreaLayout>
   )
 }

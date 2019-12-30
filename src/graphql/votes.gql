@@ -1,0 +1,25 @@
+query Votes{
+  pendingElections {
+    id
+    start
+    end
+    description
+  }
+}
+
+query CandidatesOfElection($id: ID!) {
+  election(id: $id) {
+    start
+    end
+    description
+    candidates {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation voteElection($input: VoteElectionInput!) {
+  voteOnElection(input: $input)
+}
