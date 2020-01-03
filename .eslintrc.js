@@ -45,6 +45,7 @@ module.exports = {
         extensions: ['.jsx', '.tsx']
       }
     ],
+    'no-underscore-dangle': ['error', {allow: ['__typename']}],
     'react/prefer-stateless-function': 1,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',

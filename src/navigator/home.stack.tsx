@@ -24,9 +24,11 @@ type HomeDrawerNavigatorParams = {
   [Routes.CENSUS]: undefined
   [Routes.VOTES]: undefined
   [Routes.RESULTS]: {
-    title: string
+    id: string
   }
-  [Routes.MENU_RESULTS]: undefined
+  [Routes.MENU_RESULTS]: {
+    id: string
+  }
   [Routes.CENSUS_RESULTS]: {
     title: string
   }
@@ -40,9 +42,11 @@ type HomeBottomTabsNavigatorParams = {
   [Routes.STATISTICS]: undefined
   [Routes.VOTES]: undefined
   [Routes.RESULTS]: {
-    title: string
+    id: string
   }
-  [Routes.MENU_RESULTS]: undefined
+  [Routes.MENU_RESULTS]: {
+    id: string
+  }
   [Routes.CENSUS_RESULTS]: {
     title: string
   }

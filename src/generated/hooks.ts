@@ -270,6 +270,18 @@ export type LoginMutationVariables = {
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginPayload', accessToken: string } };
 
+export type PastElectionResultsQueryVariables = {};
+
+
+export type PastElectionResultsQuery = { __typename?: 'Query', pastElectoralProcesses: Array<{ __typename: 'Election', id: string, description: string, start: string, end: string } | { __typename: 'Poll', id: string, description: string, start: string, end: string }> };
+
+export type ElectionResultQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type ElectionResultQuery = { __typename?: 'Query', election: { __typename?: 'Election', description: string, start: string, end: string, results: Array<{ __typename?: 'ElectionResults', votes: number, candidate: { __typename?: 'Candidate', firstName: string, lastName: string } }> } };
+
 export type VotesQueryVariables = {};
 
 
@@ -322,6 +334,92 @@ export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOpti
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
 export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const PastElectionResultsDocument = gql`
+    query PastElectionResults {
+  pastElectoralProcesses {
+    __typename
+    ... on Election {
+      id
+      description
+      start
+      end
+    }
+    ... on Poll {
+      id
+      description
+      start
+      end
+    }
+  }
+}
+    `;
+
+/**
+ * __usePastElectionResultsQuery__
+ *
+ * To run a query within a React component, call `usePastElectionResultsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePastElectionResultsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePastElectionResultsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePastElectionResultsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PastElectionResultsQuery, PastElectionResultsQueryVariables>) {
+        return ApolloReactHooks.useQuery<PastElectionResultsQuery, PastElectionResultsQueryVariables>(PastElectionResultsDocument, baseOptions);
+      }
+export function usePastElectionResultsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PastElectionResultsQuery, PastElectionResultsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<PastElectionResultsQuery, PastElectionResultsQueryVariables>(PastElectionResultsDocument, baseOptions);
+        }
+export type PastElectionResultsQueryHookResult = ReturnType<typeof usePastElectionResultsQuery>;
+export type PastElectionResultsLazyQueryHookResult = ReturnType<typeof usePastElectionResultsLazyQuery>;
+export type PastElectionResultsQueryResult = ApolloReactCommon.QueryResult<PastElectionResultsQuery, PastElectionResultsQueryVariables>;
+export const ElectionResultDocument = gql`
+    query ElectionResult($id: ID!) {
+  election(id: $id) {
+    description
+    start
+    end
+    results {
+      votes
+      candidate {
+        firstName
+        lastName
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useElectionResultQuery__
+ *
+ * To run a query within a React component, call `useElectionResultQuery` and pass it any options that fit your needs.
+ * When your component renders, `useElectionResultQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useElectionResultQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useElectionResultQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ElectionResultQuery, ElectionResultQueryVariables>) {
+        return ApolloReactHooks.useQuery<ElectionResultQuery, ElectionResultQueryVariables>(ElectionResultDocument, baseOptions);
+      }
+export function useElectionResultLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ElectionResultQuery, ElectionResultQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ElectionResultQuery, ElectionResultQueryVariables>(ElectionResultDocument, baseOptions);
+        }
+export type ElectionResultQueryHookResult = ReturnType<typeof useElectionResultQuery>;
+export type ElectionResultLazyQueryHookResult = ReturnType<typeof useElectionResultLazyQuery>;
+export type ElectionResultQueryResult = ApolloReactCommon.QueryResult<ElectionResultQuery, ElectionResultQueryVariables>;
 export const VotesDocument = gql`
     query Votes {
   pendingElections {

@@ -71,7 +71,7 @@ const Votes = ({ navigation }: VotesScreenProps) => {
           </View>
 
           <View style={styles.spaceList}>
-            {data &&
+            {data ? (
               data.pendingElections.map((e, idk) => {
                 return (
                   <ListItem
@@ -91,7 +91,12 @@ const Votes = ({ navigation }: VotesScreenProps) => {
                     descriptionStyle={styles.descriptionItem}
                   />
                 )
-              })}
+              })
+            ) : (
+              <View style={styles.container}>
+                <Text>No tiene votaciones pendientes</Text>
+              </View>
+            )}
           </View>
         </>
       )}

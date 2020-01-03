@@ -9,24 +9,10 @@ import {
 } from '../../components/safe-area-layout'
 import { ResultsScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
-
-const data = [
-  {
-    name: 'Kevin López Cala',
-    percentaje: 53
-  },
-  {
-    name: 'Raúl Escribano Corrales',
-    percentaje: 30
-  },
-  {
-    name: 'Rubén Montero Domínguez',
-    percentaje: 17
-  }
-]
+import { useElectionResultQuery } from '../../generated/hooks'
+import Loading from '../../components/Loading'
 
 const textColor = '#345B96'
-const winnerColor = '#FFA500'
 const styles = StyleSheet.create({
   items: {
     display: 'flex',
@@ -40,39 +26,42 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: '5%'
-  },
-  winnerText: {
-    color: winnerColor,
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: '5%'
   }
 })
 
 const Results = ({ navigation, route }: ResultsScreenProps) => {
+  const { data, loading } = useElectionResultQuery({
+    variables: { id: route.params.id }
+  })
   return (
     <SafeAreaLayout style={{ flex: 1 }} insets={SaveAreaInset.TOP}>
-      <Toolbar
-        title={route.params.title}
-        backIcon={BackIcon}
-        onBackPress={navigation.goBack}
-      />
-      <Divider />
-      <Layout style={{ flex: 1, justifyContent: 'center' }}>
-        <Title title={route.params.title} subtitle="" />
-        <View style={{ flex: 24 }}>
-          {data.map((e, idk) => (
-            <View key={idk} style={styles.items}>
-              <Text style={e.percentaje > 50 ? styles.winnerText : styles.text}>
-                {e.name}
-              </Text>
-              <Text style={e.percentaje > 50 ? styles.winnerText : styles.text}>
-                {e.percentaje} %
-              </Text>
-            </View>
-          ))}
-        </View>
-      </Layout>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Toolbar
+            title={data?.election.description}
+            backIcon={BackIcon}
+            onBackPress={navigation.goBack}
+          />
+          <Divider />
+          {data ? (
+            <Layout style={{ flex: 1, justifyContent: 'center' }}>
+              <Title title={data?.election.description} subtitle="" />
+              <View style={{ flex: 24 }}>
+                {data?.election.results.map((d, idk) => (
+                  <View key={idk} style={styles.items}>
+                    <Text style={styles.text}>
+                      {`${d.candidate.firstName} ${d.candidate.lastName}`}
+                    </Text>
+                    <Text style={styles.text}>{d.votes.toString()} %</Text>
+                  </View>
+                ))}
+              </View>
+            </Layout>
+          ) : null}
+        </>
+      )}
     </SafeAreaLayout>
   )
 }
