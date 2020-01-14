@@ -36,7 +36,7 @@ const MenuResults = ({ navigation }: ResultsScreenProps) => {
           <Layout style={styles.container}>
             <Title title="¿Qué resultados desea conocer?" subtitle="" />
             <View style={styles.spaceList}>
-              {data?.pastElectoralProcesses.map(e => {
+              {data?.electoralProcesses.map(e => {
                 if (e.__typename === 'Election') {
                   return (
                     <ListItem
