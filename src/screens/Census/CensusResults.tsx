@@ -1,6 +1,7 @@
 import React from 'react'
 import { Divider, Layout, Text } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { Toolbar } from '../../components/Toolbar'
 import { BackIcon } from '../../assets/icons'
 import {
@@ -46,23 +47,24 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
         <Title title={`Censo de ${data?.election.description}`} subtitle="" />
         <View style={{ flex: 24 }}>
-          <View style={styles.items}>
-            <View>
-              <Text style={styles.title}>Secretario: </Text>
-              <Text style={styles.element}>
-                {`${data?.election.secretary.firstName} ${data?.election.secretary.lastName}`}
-              </Text>
-            </View>
-            <View>
-              <Text style={styles.title}>Subsecretario: </Text>
-              {data?.election.delegates.map(delegate => (
-                <Text
-                  style={
-                    styles.element
-                  }>{`${delegate.firstName} ${delegate.lastName}`}</Text>
-              ))}
-            </View>
-            <View>
+          <ScrollView>
+            <View style={styles.items}>
+              <View>
+                <Text style={styles.title}>Secretario: </Text>
+                <Text style={styles.element}>
+                  {`${data?.election.secretary.firstName} ${data?.election.secretary.lastName}`}
+                </Text>
+              </View>
+
+              <View>
+                <Text style={styles.title}>Subsecretario: </Text>
+                {data?.election.delegates.map(delegate => (
+                  <Text
+                    style={
+                      styles.element
+                    }>{`${delegate.firstName} ${delegate.lastName}`}</Text>
+                ))}
+              </View>
               <Text style={styles.title}>Votantes: </Text>
               {data?.election.censuses.map(census => {
                 return census.voters.map((voter, idl) => (
@@ -72,8 +74,9 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
                 ))
               })}
             </View>
-          </View>
+          </ScrollView>
         </View>
+        <View style={{ flex: 1 }} />
       </Layout>
     </SafeAreaLayout>
   )
