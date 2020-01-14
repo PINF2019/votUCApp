@@ -497,7 +497,7 @@ export type ElectionResultQueryVariables = {
 };
 
 
-export type ElectionResultQuery = { __typename?: 'Query', election: { __typename?: 'Election', description: string, start: string, end: string, results: { __typename?: 'ResultsForElection', voters: number } } };
+export type ElectionResultQuery = { __typename?: 'Query', election: { __typename?: 'Election', description: string, start: string, end: string, results: { __typename?: 'ResultsForElection', votesCast: number, whiteVotes: number, voters: number, results: Array<{ __typename?: 'ElectionResults', votes: number, candidate: { __typename?: 'Candidate', firstName: string, lastName: string } }> } } };
 
 export type VotesQueryVariables = {};
 
@@ -644,7 +644,16 @@ export const ElectionResultDocument = gql`
     start
     end
     results {
+      votesCast
+      whiteVotes
       voters
+      results {
+        votes
+        candidate {
+          firstName
+          lastName
+        }
+      }
     }
   }
 }

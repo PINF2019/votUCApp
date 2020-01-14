@@ -22,7 +22,16 @@ query ElectionResult($id: ID!) {
     start
     end
     results {
-      voters 
+      votesCast
+      whiteVotes
+      voters
+      results{
+        votes
+      	candidate{
+          firstName
+          lastName
+        }
+      }
     }
   }
 }
