@@ -30,7 +30,7 @@ type HomeDrawerNavigatorParams = {
     id: string
   }
   [Routes.CENSUS_RESULTS]: {
-    title: string
+    id: string
   }
   [Routes.ELECTION]: {
     id: string
@@ -48,7 +48,7 @@ type HomeBottomTabsNavigatorParams = {
     id: string
   }
   [Routes.CENSUS_RESULTS]: {
-    title: string
+    id: string
   }
   [Routes.ELECTION]: {
     id: string

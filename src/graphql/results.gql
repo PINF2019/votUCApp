@@ -1,20 +1,20 @@
-query PastElectionResults {
-  pastElectoralProcesses {
-    __typename
-    ... on Election {
-      id
-      description
-      start
-      end
-    }
-    ... on Poll {
-      id
-      description
-      start
-      end
-    }
-  }
-}
+# query PastElectionResults {
+#   pastElectoralProcesses {
+#     __typename
+#     ... on Election {
+#       id
+#       description
+#       start
+#       end
+#     }
+#     ... on Poll {
+#       id
+#       description
+#       start
+#       end
+#     }
+#   }
+# }
 
 query ElectionResult($id: ID!) {
   election(id: $id) {
@@ -22,11 +22,7 @@ query ElectionResult($id: ID!) {
     start
     end
     results {
-      votes
-      candidate {
-        firstName
-        lastName
-      }
+      voters 
     }
   }
 }

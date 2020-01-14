@@ -9,18 +9,7 @@ import {
 } from '../../components/safe-area-layout'
 import { CensusResultsScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
-
-const data = {
-  secretario: 'Apellido1 Apellido2, Nombre',
-  subsecretario: 'Apellido1 Apellido2, Nombre',
-  votantes: [
-    'Apellido1 Apellido2, Nombre',
-    'Apellido1 Apellido2, Nombre',
-    'Apellido1 Apellido2, Nombre',
-    'Apellido1 Apellido2, Nombre',
-    'Apellido1 Apellido2, Nombre'
-  ]
-}
+import { useCensusDataQuery } from '../../generated/hooks'
 
 const textColor = '#345B96'
 const styles = StyleSheet.create({
@@ -44,33 +33,44 @@ const styles = StyleSheet.create({
 })
 
 const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
+  const { data } = useCensusDataQuery({ variables: { id: route.params.id } })
+
   return (
     <SafeAreaLayout style={{ flex: 1 }} insets={SaveAreaInset.TOP}>
       <Toolbar
-        title={route.params.title}
+        title={data?.election.description}
         backIcon={BackIcon}
         onBackPress={navigation.goBack}
       />
       <Divider />
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
-        <Title title={`Censo de ${route.params.title}`} subtitle="" />
+        <Title title={`Censo de ${data?.election.description}`} subtitle="" />
         <View style={{ flex: 24 }}>
           <View style={styles.items}>
             <View>
               <Text style={styles.title}>Secretario: </Text>
-              <Text style={styles.element}>{data.secretario}</Text>
+              <Text style={styles.element}>
+                {`${data?.election.secretary.firstName} ${data?.election.secretary.lastName}`}
+              </Text>
             </View>
             <View>
               <Text style={styles.title}>Subsecretario: </Text>
-              <Text style={styles.element}>{data.subsecretario}</Text>
+              {data?.election.delegates.map(delegate => (
+                <Text
+                  style={
+                    styles.element
+                  }>{`${delegate.firstName} ${delegate.lastName}`}</Text>
+              ))}
             </View>
             <View>
               <Text style={styles.title}>Votantes: </Text>
-              {data.votantes.map((e, idk) => (
-                <Text style={styles.element} key={idk}>
-                  {e}
-                </Text>
-              ))}
+              {data?.election.censuses.map(census => {
+                return census.voters.map((voter, idl) => (
+                  <Text
+                    style={styles.element}
+                    key={idl}>{`${voter.firstName} ${voter.lastName}`}</Text>
+                ))
+              })}
             </View>
           </View>
         </View>
