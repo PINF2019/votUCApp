@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     width: '50%'
   },
   loginText: {
+    alignSelf: 'stretch',
     color: whiteText
   },
   passwordContainer: {
