@@ -511,6 +511,11 @@ export type CandidatesOfElectionQueryVariables = {
 
 export type CandidatesOfElectionQuery = { __typename?: 'Query', election: { __typename?: 'Election', start: string, end: string, description: string, candidates: Array<{ __typename?: 'Candidate', id: string, firstName: string, lastName: string }> } };
 
+export type PendingElectionsToVoteQueryVariables = {};
+
+
+export type PendingElectionsToVoteQuery = { __typename?: 'Query', pendingElections: Array<{ __typename?: 'Election', id: string, start: string, end: string, description: string }> };
+
 export type VoteElectionMutationVariables = {
   input: VoteElectionInput
 };
@@ -750,6 +755,41 @@ export function useCandidatesOfElectionLazyQuery(baseOptions?: ApolloReactHooks.
 export type CandidatesOfElectionQueryHookResult = ReturnType<typeof useCandidatesOfElectionQuery>;
 export type CandidatesOfElectionLazyQueryHookResult = ReturnType<typeof useCandidatesOfElectionLazyQuery>;
 export type CandidatesOfElectionQueryResult = ApolloReactCommon.QueryResult<CandidatesOfElectionQuery, CandidatesOfElectionQueryVariables>;
+export const PendingElectionsToVoteDocument = gql`
+    query pendingElectionsToVote {
+  pendingElections {
+    id
+    start
+    end
+    description
+  }
+}
+    `;
+
+/**
+ * __usePendingElectionsToVoteQuery__
+ *
+ * To run a query within a React component, call `usePendingElectionsToVoteQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePendingElectionsToVoteQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePendingElectionsToVoteQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePendingElectionsToVoteQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PendingElectionsToVoteQuery, PendingElectionsToVoteQueryVariables>) {
+        return ApolloReactHooks.useQuery<PendingElectionsToVoteQuery, PendingElectionsToVoteQueryVariables>(PendingElectionsToVoteDocument, baseOptions);
+      }
+export function usePendingElectionsToVoteLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PendingElectionsToVoteQuery, PendingElectionsToVoteQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<PendingElectionsToVoteQuery, PendingElectionsToVoteQueryVariables>(PendingElectionsToVoteDocument, baseOptions);
+        }
+export type PendingElectionsToVoteQueryHookResult = ReturnType<typeof usePendingElectionsToVoteQuery>;
+export type PendingElectionsToVoteLazyQueryHookResult = ReturnType<typeof usePendingElectionsToVoteLazyQuery>;
+export type PendingElectionsToVoteQueryResult = ApolloReactCommon.QueryResult<PendingElectionsToVoteQuery, PendingElectionsToVoteQueryVariables>;
 export const VoteElectionDocument = gql`
     mutation voteElection($input: VoteElectionInput!) {
   voteOnElection(input: $input)
