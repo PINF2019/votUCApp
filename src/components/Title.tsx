@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, Dimensions } from 'react-native'
+import { TranslationWidth } from '@ui-kitten/components'
 
 const color = '#345B96'
 const styles = StyleSheet.create({
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
   },
   pipe: {
     color,
-    fontSize: 82
+    fontSize: 0.2 * Dimensions.get('window').width
   },
   subtitle: {
     color,
