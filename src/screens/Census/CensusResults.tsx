@@ -1,7 +1,11 @@
 import React from 'react'
 import { Divider, Layout, Text } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
+
 import { ScrollView } from 'react-native-gesture-handler'
+
+import moment from 'moment'
+
 import { Toolbar } from '../../components/Toolbar'
 import { BackIcon } from '../../assets/icons'
 import {
@@ -11,6 +15,7 @@ import {
 import { CensusResultsScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
 import { useCensusDataQuery } from '../../generated/hooks'
+import Loading from '../../components/Loading'
 
 const textColor = '#345B96'
 const styles = StyleSheet.create({
@@ -34,9 +39,12 @@ const styles = StyleSheet.create({
 })
 
 const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
-  const { data } = useCensusDataQuery({ variables: { id: route.params.id } })
-
-  return (
+  const { data, loading } = useCensusDataQuery({
+    variables: { id: route.params.id }
+  })
+  return loading ? (
+    <Loading />
+  ) : (
     <SafeAreaLayout style={{ flex: 1 }} insets={SaveAreaInset.TOP}>
       <Toolbar
         title={data?.election.description}
@@ -45,7 +53,12 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
       />
       <Divider />
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
-        <Title title={`Censo de ${data?.election.description}`} subtitle="" />
+        <Title
+          title={`Censo de ${data?.election.description}`}
+          subtitle={`${moment(data?.election.start).format('L')} - ${moment(
+            data?.election.end
+          ).format('L')}`}
+        />
         <View style={{ flex: 24 }}>
           <ScrollView>
             <View style={styles.items}>

@@ -20,6 +20,15 @@ query CandidatesOfElection($id: ID!) {
   }
 }
 
+query pendingElectionsToVote{
+  pendingElections{
+    id
+    start
+    end
+    description
+  }
+}
+
 mutation voteElection($input: VoteElectionInput!) {
   voteOnElection(input: $input)
 }

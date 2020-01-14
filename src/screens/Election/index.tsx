@@ -11,7 +11,7 @@ import {
 import { Toolbar } from '../../components/Toolbar'
 import { Routes } from '../../navigator'
 import { VotesScreenProps } from '../../navigator/home.stack'
-import { useVotesQuery } from '../../generated/hooks'
+import { usePendingElectionsToVoteQuery } from '../../generated/hooks'
 import Loading from '../../components/Loading'
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 })
 
 const Votes = ({ navigation }: VotesScreenProps) => {
-  const { data, loading } = useVotesQuery()
+  const { data, loading } = usePendingElectionsToVoteQuery()
 
   return (
     <SafeAreaLayout style={styles.areaLayout} insets={SaveAreaInset.TOP}>

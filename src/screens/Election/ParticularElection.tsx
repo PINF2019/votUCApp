@@ -32,7 +32,7 @@ const ParticularElection = ({
   const [selectedIndex, setSelectedIndex] = useState<number | undefined>(
     undefined
   )
-  // const [validate, setValidate] = useState(true)
+
   const [modal, setModal] = useState(false)
 
   const onCheckedChange = useCallback(
@@ -90,16 +90,18 @@ const ParticularElection = ({
                     const candidateId =
                       selectedIndex &&
                       data.election.candidates[selectedIndex].id
-                    const response = await vote({
-                      variables: {
-                        input: {
-                          candidate: candidateId as string,
-                          election: route.params.id
+                    try {
+                      const response = await vote({
+                        variables: {
+                          input: {
+                            candidates: [candidateId as string],
+                            election: route.params.id
+                          }
                         }
-                      }
-                    })
-                    if (response.data?.voteOnElection) {
+                      })
                       setModal(true)
+                    } catch (error) {
+                      return <></>
                     }
                   }}
                   disabled={selectedIndex === undefined}
