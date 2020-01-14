@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     justifyContent: 'flex-start',
-    marginLeft: '6%',
+    marginLeft: '10%',
     paddingTop: 5
   },
   listView: {

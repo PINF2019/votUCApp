@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color,
-    fontSize: 28,
+    fontSize: 0.07 * Dimensions.get('window').width,
     fontWeight: 'bold'
   },
   titleContainer: {
