@@ -2,7 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import { Divider, Layout, Text } from '@ui-kitten/components'
 import { View, ScrollView } from 'react-native'
-import { PieChart, BarChart, Grid } from 'react-native-svg-charts'
+import { PieChart, BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
+import * as scale from 'd3-scale'
 import { Toolbar } from '../../components/Toolbar'
 import { BackIcon } from '../../assets/icons'
 import {
@@ -51,6 +52,7 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
       key,
       votes: res.votes,
       name: `${res.candidate.firstName} ${res.candidate.lastName}`,
+      lastname: `${res.candidate.lastName}`,
       svg: { fill: randomColor() }
     }
   })
@@ -86,14 +88,14 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   <View style={styles.items}>
                     <Text style={styles.icon}>Número total de electores:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
+                      {data?.election.results.voters.toString()}
                     </Text>
                   </View>
 
                   <View style={styles.items}>
                     <Text style={styles.icon}>Votos a candidaturas:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.voters.toString()}
+                      {data?.election.results.votesCast.toString()}
                     </Text>
                   </View>
 
@@ -105,30 +107,41 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   </View>
 
                   <View style={styles.items}>
-                    <Text style={styles.icon}>Votos nulos:</Text>
-                    <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
-                    </Text>
-                  </View>
-
-                  <View style={styles.items}>
                     <Text style={styles.icon}>Votos totales válidos:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
+                      {(
+                        data?.election.results.votesCast +
+                        data?.election.results.whiteVotes
+                      ).toString()}
                     </Text>
                   </View>
 
                   <View style={styles.items}>
                     <Text style={styles.icon}>Participación:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
+                      {`${(
+                        ((data?.election.results.votesCast +
+                          data?.election.results.whiteVotes) /
+                          data?.election.results.voters) *
+                        100
+                      )
+                        .toString()
+                        .substr(0, 3)}%`}
                     </Text>
                   </View>
 
                   <View style={styles.items}>
                     <Text style={styles.icon}>Abstención:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
+                      {`${(
+                        100 -
+                        ((data?.election.results.votesCast +
+                          data?.election.results.whiteVotes) /
+                          data?.election.results.voters) *
+                          100
+                      )
+                        .toString()
+                        .substr(0, 4)}%`}
                     </Text>
                   </View>
                 </View>
@@ -163,7 +176,11 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                             margin: 7,
                             color: r.svg.fill
                           }}>
-                          {r.votes.toString()} votos
+                          {r.votes.toString()} votos (
+                          {((r.votes / data?.election.results.voters) * 100)
+                            .toString()
+                            .substr(0, 4)}
+                          %)
                         </Text>
                       </View>
                     ))}
@@ -180,6 +197,13 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   spacingOuter={0.4}>
                   <Grid direction={Grid.Direction.HORIZONTAL} />
                 </BarChart>
+                <XAxis
+                  data={resultados}
+                  scale={scale.scaleBand}
+                  spacingOuter={0.9}
+                  spacingInner={0.3}
+                  formatLabel={(_, index) => resultados[index].lastname}
+                />
               </Layout>
             </ScrollView>
           ) : null}
