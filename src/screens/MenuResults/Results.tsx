@@ -11,6 +11,7 @@ import {
 } from '../../components/safe-area-layout'
 import { ResultsScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
+import Subtitle from '../../components/Subtitle'
 import { useElectionResultQuery } from '../../generated/hooks'
 import Loading from '../../components/Loading'
 import styles from './styles'
@@ -79,10 +80,7 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   )} - ${moment(data?.election.end).format('L')}`}
                 />
 
-                <View style={styles.containerV2}>
-                  <Text style={styles.pipe}>|</Text>
-                  <Text style={styles.title}>Datos Globales</Text>
-                </View>
+                <Subtitle title="Datos Globales" />
 
                 <View style={{ flex: 1 }}>
                   <View style={styles.items}>
@@ -135,6 +133,8 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   </View>
                 </View>
 
+                <Subtitle title="Porcentaje de votos" />
+
                 <PieChart
                   style={{ height: 200, marginLeft: '10%', marginRight: '10%' }}
                   valueAccessor={({ item }) => item.votes}
@@ -168,15 +168,17 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                       </View>
                     ))}
                 </View>
+                <Subtitle title="Total de votos" />
                 <BarChart
                   style={{ height: 200, marginLeft: '10%', marginRight: '10%' }}
                   data={resultados}
-                  horizontal
                   yAccessor={({ item }) => item.votes}
                   contentInset={{ top: 10, bottom: 10 }}
                   spacing={0.2}
-                  gridMin={0}>
-                  <Grid direction={Grid.Direction.VERTICAL} />
+                  gridMin={0}
+                  spacingInner={0.4}
+                  spacingOuter={0.4}>
+                  <Grid direction={Grid.Direction.HORIZONTAL} />
                 </BarChart>
               </Layout>
             </ScrollView>

@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     flexDirection: 'row',
     marginBottom: 10,
-    marginLeft: '5%'
+    marginLeft: '5%',
+    padding: '5%'
   },
   descriptionItem: { color: textColor },
   icon: {
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
 
   pipe: {
     color: 'orange',
-    fontSize: 0.2 * Dimensions.get('window').width
+    fontSize: 0.2 * Dimensions.get('window').width,
+    marginBottom: '-5%'
   },
   safeArea: {
     flex: 1
@@ -60,7 +62,9 @@ const styles = StyleSheet.create({
   title: {
     color: '#345B96',
     fontSize: 0.04 * Dimensions.get('window').width,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: '-5%',
+    paddingBottom: '5%'
   },
   titleContainer: {
     alignItems: 'flex-start',
