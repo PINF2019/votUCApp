@@ -7,12 +7,7 @@
 #       start
 #       end
 #     }
-#     ... on Poll {
-#       id
-#       description
-#       start
-#       end
-#     }
+# 
 #   }
 # }
 

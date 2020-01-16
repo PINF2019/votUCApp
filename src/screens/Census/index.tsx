@@ -43,10 +43,9 @@ const Census = ({ navigation }: CensusScreenProps) => {
                   <ListItem
                     key={election.id}
                     title={election.description}
-                    description={
-                      moment(election.start).format('L') +
-                      moment(election.end).format('L')
-                    }
+                    description={`${moment(election.start).format(
+                      'L'
+                    )} - ${moment(election.end).format('L')}`}
                     onPress={() =>
                       navigation.navigate(Routes.CENSUS_RESULTS, {
                         id: election.id

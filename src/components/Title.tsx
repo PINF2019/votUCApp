@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { TranslationWidth } from '@ui-kitten/components'
 
 const color = '#345B96'
 const styles = StyleSheet.create({
