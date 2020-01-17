@@ -50,19 +50,18 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
       />
       <Divider />
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
-        {/*TITLE???*/}
-        <Title
-          title={`Censo de ${data?.election.description}`}
-          subtitle={`${moment(data?.election.start).format('L')} - ${moment(
-            data?.election.end
-          ).format('L')}`}
-        />
         <View style={{ flex: 24 }}>
           <ScrollView>
             <Title
               title={`Censo de ${data?.election.description}`}
-              subtitle=""
+              subtitle={`${moment(data?.election.start).format('L')} - ${moment(
+                data?.election.end
+              ).format('L')}`}
             />
+            {/* <Title
+              title={`Censo de ${data?.election.description}`}
+              subtitle=""
+            /> */}
 
             <View style={styles.items}>
               <View>
