@@ -2,7 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import { Divider, Layout, Text } from '@ui-kitten/components'
 import { View, ScrollView } from 'react-native'
-import { PieChart, BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
+import { Text as SvgText } from 'react-native-svg'
+import { PieChart, BarChart, Grid, XAxis } from 'react-native-svg-charts'
 import * as scale from 'd3-scale'
 import { Toolbar } from '../../components/Toolbar'
 import { BackIcon } from '../../assets/icons'
@@ -60,6 +61,47 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
   resultados = resultados?.sort((a: ResultsInterface, b: ResultsInterface) =>
     a.votes > b.votes ? -1 : 1
   )
+
+  const votes = data?.election.results.results.map((res, key) => {
+    return res.votes
+  })
+  const CUT_OFF = Math.max.apply(null, votes)
+  const totalVotesToCandidate = data?.election.results.voters
+
+  const LabelPie = ({ slices, height, width }) => {
+    return slices.map((slice, index) => {
+      const { labelCentroid, pieCentroid, data } = slice
+
+      return (
+        <SvgText
+          key={index}
+          x={pieCentroid[0]}
+          y={pieCentroid[1]}
+          fill="white"
+          textAnchor="middle"
+          alignmentBaseline="middle"
+          fontSize={14}
+          stroke="black"
+          strokeWidth={0.2}>
+          {`${((data.votes / totalVotesToCandidate) * 100).toFixed(2)}%`}
+        </SvgText>
+      )
+    })
+  }
+
+  const LabelBar = ({ x, y, bandwidth, data }) =>
+    data.map((value, index) => (
+      <SvgText
+        key={index}
+        x={x(index) + bandwidth / 2}
+        y={value.votes < CUT_OFF ? y(value.votes) - 10 : y(value.votes) + 15}
+        fontSize={14}
+        fill={value.votes >= CUT_OFF ? 'white' : 'black'}
+        alignmentBaseline="middle"
+        textAnchor="middle">
+        {value.votes}
+      </SvgText>
+    ))
 
   return (
     <SafeAreaLayout style={{ flex: 1 }} insets={SaveAreaInset.TOP}>
@@ -143,14 +185,19 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                 <Subtitle title="Porcentaje de votos" />
 
                 <PieChart
-                  style={{ height: 200, marginLeft: '10%', marginRight: '10%' }}
+                  style={{
+                    height: 200,
+                    marginLeft: '10%',
+                    marginRight: '10%'
+                  }}
                   valueAccessor={({ item }) => item.votes}
                   data={resultados}
                   spacing={0}
                   outerRadius="95%"
                   innerRadius="50%"
-                  labelRadius={10}
-                />
+                  labelRadius={10}>
+                  <LabelPie />
+                </PieChart>
 
                 <View style={{ flex: 1 }}>
                   {resultados &&
@@ -191,12 +238,7 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   spacingInner={0.4}
                   spacingOuter={0.4}>
                   <Grid direction={Grid.Direction.HORIZONTAL} />
-                  {/* <Labels
-                    x={10}
-                    y={20}
-                    data={data.election.results.results}
-                    bandwidth={19}
-                  /> */}
+                  <LabelBar />
                 </BarChart>
                 <XAxis
                   data={resultados}
