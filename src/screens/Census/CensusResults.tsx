@@ -45,9 +45,13 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
       />
       <Divider />
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
-        <Title title={`Censo de ${data?.election.description}`} subtitle="" />
         <View style={{ flex: 24 }}>
           <ScrollView>
+            <Title
+              title={`Censo de ${data?.election.description}`}
+              subtitle=""
+            />
+
             <View style={styles.items}>
               <View>
                 <Text style={styles.title}>Secretario: </Text>
