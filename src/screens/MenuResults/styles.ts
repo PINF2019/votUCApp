@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   descriptionItem: { color: textColor },
   icon: {
-    // color: 'red',
+    color: '#206489',
     fontWeight: 'bold',
     margin: 7
   },
