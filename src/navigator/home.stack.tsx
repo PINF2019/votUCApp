@@ -102,8 +102,11 @@ export interface ParticularPollScreenProps {
 
 export interface ResultsScreenProps {
   navigation: CompositeNavigationProp<
-    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>,
-    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.RESULTS>
+    CompositeNavigationProp<
+      DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>,
+      DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.RESULTS>
+    >,
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.POLL>
   >
   route: RouteProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>
 }
