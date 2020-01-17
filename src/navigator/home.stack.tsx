@@ -35,6 +35,9 @@ type HomeDrawerNavigatorParams = {
   [Routes.ELECTION]: {
     id: string
   }
+  [Routes.POLL]: {
+    id: string
+  }
 }
 
 type HomeBottomTabsNavigatorParams = {
@@ -51,6 +54,9 @@ type HomeBottomTabsNavigatorParams = {
     id: string
   }
   [Routes.ELECTION]: {
+    id: string
+  }
+  [Routes.POLL]: {
     id: string
   }
 }
@@ -89,10 +95,18 @@ export interface ParticularElectionScreenProps {
   route: RouteProp<HomeDrawerNavigatorParams, Routes.ELECTION>
 }
 
+export interface ParticularPollScreenProps {
+  navigation: DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.POLL>
+  route: RouteProp<HomeDrawerNavigatorParams, Routes.POLL>
+}
+
 export interface ResultsScreenProps {
   navigation: CompositeNavigationProp<
-    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>,
-    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.RESULTS>
+    CompositeNavigationProp<
+      DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>,
+      DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.RESULTS>
+    >,
+    DrawerNavigationProp<HomeDrawerNavigatorParams, Routes.POLL>
   >
   route: RouteProp<HomeDrawerNavigatorParams, Routes.MENU_RESULTS>
 }

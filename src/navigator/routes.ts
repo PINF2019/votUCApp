@@ -10,7 +10,8 @@ enum Routes {
   VOTES = 'votes',
   CENSUS_RESULTS = 'census_results',
   MENU_RESULTS = 'menu_results',
-  ELECTION = 'election'
+  ELECTION = 'election',
+  POLL = 'poll'
 }
 
 export default Routes

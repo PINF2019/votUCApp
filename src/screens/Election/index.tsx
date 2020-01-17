@@ -11,7 +11,7 @@ import {
 import { Toolbar } from '../../components/Toolbar'
 import { Routes } from '../../navigator'
 import { VotesScreenProps } from '../../navigator/home.stack'
-import { useVotesQuery } from '../../generated/hooks'
+import { usePastElectionsQuery } from '../../generated/hooks'
 import Loading from '../../components/Loading'
 
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
 })
 
 const Votes = ({ navigation }: VotesScreenProps) => {
-  const { data, loading } = useVotesQuery()
-
+  const { data, loading } = usePastElectionsQuery()
+  const electionsAndPolls = data?.pendingElectoralProcesses
   return (
     <SafeAreaLayout style={styles.areaLayout} insets={SaveAreaInset.TOP}>
       {loading ? (
@@ -71,19 +71,25 @@ const Votes = ({ navigation }: VotesScreenProps) => {
           </View>
 
           <View style={styles.spaceList}>
-            {data ? (
-              data.pendingElections.map((e, idk) => {
+            {data?.pendingElectoralProcesses ? (
+              electionsAndPolls?.map((elecOrPoll, idk) => {
                 return (
                   <ListItem
                     key={idk}
-                    title={e.description}
-                    description={`${moment(e.start).format('L')} - ${moment(
-                      e.end
-                    ).format('L')}`}
+                    title={elecOrPoll.description}
+                    description={`${moment(elecOrPoll.start).format(
+                      'L'
+                    )} - ${moment(elecOrPoll.end).format('L')}`}
                     onPress={() => {
-                      navigation.navigate(Routes.ELECTION, {
-                        id: e.id
-                      })
+                      if (elecOrPoll.__typename === 'Election') {
+                        navigation.navigate(Routes.ELECTION, {
+                          id: elecOrPoll.id
+                        })
+                      } else {
+                        navigation.navigate(Routes.POLL, {
+                          id: elecOrPoll.id
+                        })
+                      }
                     }}
                     accessory={renderItemAccessory}
                     style={styles.listItem}

@@ -1,15 +1,19 @@
-# query PastElectionResults {
-#   pastElectoralProcesses {
-#     __typename
-#     ... on Election {
-#       id
-#       description
-#       start
-#       end
-#     }
-# 
-#   }
-# }
+query PastElections {
+  pendingElectoralProcesses {
+    ... on Election {
+      id
+      start
+      end
+      description
+    }
+    ... on Poll {
+      id
+      start
+      end
+      description
+    }
+  }
+}
 
 query ElectionResult($id: ID!) {
   election(id: $id) {

@@ -16,14 +16,11 @@ import {
   useCandidatesOfElectionQuery,
   useVoteElectionMutation
 } from '../../generated/hooks'
-import { ParticularElectionScreenProps } from '../../navigator/home.stack'
+import { ParticularPollScreenProps } from '../../navigator/home.stack'
 import styles from './styles'
 import Loading from '../../components/Loading'
 
-const ParticularElection = ({
-  navigation,
-  route
-}: ParticularElectionScreenProps) => {
+const ParticularPoll = ({ navigation, route }: ParticularPollScreenProps) => {
   const { data, loading } = useCandidatesOfElectionQuery({
     variables: { id: route.params.id }
   })
@@ -124,4 +121,4 @@ const ParticularElection = ({
   return null
 }
 
-export default ParticularElection
+export default ParticularPoll
