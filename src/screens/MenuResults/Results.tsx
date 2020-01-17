@@ -16,6 +16,7 @@ import Subtitle from '../../components/Subtitle'
 import { useElectionResultQuery } from '../../generated/hooks'
 import Loading from '../../components/Loading'
 import styles from './styles'
+// import Labels from '../../components/Labels'
 
 const randomColor = () => {
   // const colors = [
@@ -95,7 +96,10 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   <View style={styles.items}>
                     <Text style={styles.icon}>Votos a candidaturas:</Text>
                     <Text style={styles.icon}>
-                      {data?.election.results.votesCast.toString()}
+                      {(
+                        data?.election.results.votesCast -
+                        data?.election.results.whiteVotes
+                      ).toString()}
                     </Text>
                   </View>
 
@@ -109,10 +113,7 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   <View style={styles.items}>
                     <Text style={styles.icon}>Votos totales válidos:</Text>
                     <Text style={styles.icon}>
-                      {(
-                        data?.election.results.votesCast +
-                        data?.election.results.whiteVotes
-                      ).toString()}
+                      {(data?.election.results.votesCast).toString()}
                     </Text>
                   </View>
 
@@ -120,13 +121,9 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                     <Text style={styles.icon}>Participación:</Text>
                     <Text style={styles.icon}>
                       {`${(
-                        ((data?.election.results.votesCast +
-                          data?.election.results.whiteVotes) /
-                          data?.election.results.voters) *
-                        100
-                      )
-                        .toString()
-                        .substr(0, 3)}%`}
+                        (data?.election.results.votesCast * 100) /
+                        data?.election.results.voters
+                      ).toFixed(2)}%`}
                     </Text>
                   </View>
 
@@ -134,14 +131,11 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                     <Text style={styles.icon}>Abstención:</Text>
                     <Text style={styles.icon}>
                       {`${(
-                        100 -
-                        ((data?.election.results.votesCast +
-                          data?.election.results.whiteVotes) /
-                          data?.election.results.voters) *
-                          100
-                      )
-                        .toString()
-                        .substr(0, 4)}%`}
+                        ((data?.election.results.voters -
+                          data?.election.results.votesCast) *
+                          100) /
+                        data?.election.results.voters
+                      ).toFixed(2)}%`}
                     </Text>
                   </View>
                 </View>
@@ -177,9 +171,10 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                             color: r.svg.fill
                           }}>
                           {r.votes.toString()} votos (
-                          {((r.votes / data?.election.results.voters) * 100)
-                            .toString()
-                            .substr(0, 4)}
+                          {(
+                            (r.votes / data?.election.results.voters) *
+                            100
+                          ).toFixed(2)}
                           %)
                         </Text>
                       </View>
@@ -196,6 +191,12 @@ const Results = ({ navigation, route }: ResultsScreenProps) => {
                   spacingInner={0.4}
                   spacingOuter={0.4}>
                   <Grid direction={Grid.Direction.HORIZONTAL} />
+                  {/* <Labels
+                    x={10}
+                    y={20}
+                    data={data.election.results.results}
+                    bandwidth={19}
+                  /> */}
                 </BarChart>
                 <XAxis
                   data={resultados}
