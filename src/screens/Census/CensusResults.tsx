@@ -1,11 +1,8 @@
 import React from 'react'
 import { Divider, Layout, Text } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
-
 import { ScrollView } from 'react-native-gesture-handler'
-
 import moment from 'moment'
-
 import { Toolbar } from '../../components/Toolbar'
 import { BackIcon } from '../../assets/icons'
 import {
@@ -53,6 +50,7 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
       />
       <Divider />
       <Layout style={{ flex: 1, justifyContent: 'center' }}>
+        {/*TITLE???*/}
         <Title
           title={`Censo de ${data?.election.description}`}
           subtitle={`${moment(data?.election.start).format('L')} - ${moment(
@@ -61,6 +59,11 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
         />
         <View style={{ flex: 24 }}>
           <ScrollView>
+            <Title
+              title={`Censo de ${data?.election.description}`}
+              subtitle=""
+            />
+
             <View style={styles.items}>
               <View>
                 <Text style={styles.title}>Secretario: </Text>

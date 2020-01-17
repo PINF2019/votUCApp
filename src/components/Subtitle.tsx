@@ -6,19 +6,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginBottom: 10,
-    marginLeft: '5%'
+    marginLeft: '10%'
   },
   pipe: {
-    color,
-    fontSize: 0.2 * Dimensions.get('window').width
+    color: 'orange',
+    fontSize: 0.12 * Dimensions.get('window').width
   },
-  subtitle: {
-    color,
-    fontSize: 19
-  },
+
   title: {
     color,
-    fontSize: 0.07 * Dimensions.get('window').width,
+    fontSize: 0.04 * Dimensions.get('window').width,
     fontWeight: 'bold'
   },
   titleContainer: {
@@ -34,12 +31,11 @@ export type TitleProps = {
   subtitle: string
 }
 
-const Title = ({ title, subtitle }: TitleProps) => (
+const Title = ({ title }: TitleProps) => (
   <View style={styles.container}>
     <Text style={styles.pipe}>|</Text>
     <View style={styles.titleContainer}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subtitle}>{subtitle}</Text>
     </View>
   </View>
 )

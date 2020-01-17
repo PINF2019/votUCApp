@@ -15,14 +15,22 @@ query PastElections {
   }
 }
 
-
 query ElectionResult($id: ID!) {
   election(id: $id) {
     description
     start
     end
     results {
-      voters 
+      votesCast
+      whiteVotes
+      voters
+      results{
+        votes
+      	candidate{
+          firstName
+          lastName
+        }
+      }
     }
   }
 }
