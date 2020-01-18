@@ -54,15 +54,15 @@ const ParticularElection = ({
             />
             <Divider />
             <View style={styles.safeArea}>
-              <Title
-                title={data.election.description}
-                subtitle={`${moment(data.election.start).format(
-                  'L'
-                )} - ${moment(data.election.end).format('L')}`}
-              />
-              <Text style={styles.choice}> Su elección:</Text>
-              <SafeAreaView style={styles.listView}>
-                <ScrollView style={styles.listView}>
+              <ScrollView>
+                <Title
+                  title={data.election.description}
+                  subtitle={`${moment(data.election.start).format(
+                    'L'
+                  )} - ${moment(data.election.end).format('L')}`}
+                />
+                <Text style={styles.choice}> Su elección:</Text>
+                <SafeAreaView style={styles.listView}>
                   <RadioGroup
                     selectedIndex={selectedIndex}
                     onChange={onCheckedChange}>
@@ -76,22 +76,19 @@ const ParticularElection = ({
                       />
                     ))}
                   </RadioGroup>
-                </ScrollView>
-              </SafeAreaView>
-              <View style={styles.bottomButton}>
-                {/* <Button
+                </SafeAreaView>
+                <View style={styles.bottomButton}>
+                  {/* <Button
               onPress={() => setValidate(prev => !prev)}
               style={styles.buttonLeft}
               size="giant">
               Validar mi elección
             </Button> */}
-                <Button
-                  onPress={async () => {
-                    const candidateId =
-                      selectedIndex &&
-                      data.election.candidates[selectedIndex].id
-                    try {
-                      const response = await vote({
+                  <Button
+                    onPress={async () => {
+                      const candidateId =
+                        data.election.candidates[selectedIndex].id
+                      const { errors } = await vote({
                         variables: {
                           input: {
                             candidates: [candidateId as string],
@@ -99,22 +96,24 @@ const ParticularElection = ({
                           }
                         }
                       })
-                      setModal(true)
-                    } catch (error) {
-                      return <></>
-                    }
-                  }}
-                  disabled={selectedIndex === undefined}
-                  style={styles.buttonRight}
-                  size="giant">
-                  VOTAR
-                </Button>
-              </View>
-              <Modal
-                visible={modal}
-                title="Gracias por su participación"
-                subtitle="Su voto ha sido enviado"
-              />
+                      if (errors) {
+                        console.warn(errors, { depth: Infinity })
+                      } else {
+                        setModal(true)
+                      }
+                    }}
+                    disabled={selectedIndex === undefined}
+                    style={styles.buttonRight}
+                    size="giant">
+                    VOTAR
+                  </Button>
+                </View>
+                <Modal
+                  visible={modal}
+                  title="Gracias por su participación"
+                  subtitle="Su voto ha sido enviado"
+                />
+              </ScrollView>
             </View>
           </>
         )}

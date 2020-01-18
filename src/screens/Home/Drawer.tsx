@@ -7,14 +7,10 @@ import {
   Drawer,
   DrawerElement,
   MenuItemType,
-  Layout,
+  Layout
 } from '@ui-kitten/components'
 import React from 'react'
-import {
-  ImageBackgroundProps,
-  StyleSheet,
-  View
-} from 'react-native'
+import { ImageBackgroundProps, StyleSheet, View } from 'react-native'
 import LogOut from '../../components/Logout'
 import { DrawerHomeScreenProps } from '../../navigator/home.stack'
 

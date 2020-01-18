@@ -9,7 +9,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
-  link: authLink.concat(httpLink)
+  link: authLink.concat(httpLink),
+  defaultOptions: {
+    mutate: {
+      errorPolicy: 'all'
+    }
+  }
 })
 
 export default client

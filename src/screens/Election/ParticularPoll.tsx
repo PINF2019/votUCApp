@@ -13,18 +13,22 @@ import {
 import Title from '../../components/Title'
 import { Toolbar } from '../../components/Toolbar'
 import {
-  useCandidatesOfElectionQuery,
-  useVoteElectionMutation
+  useOptionsOnPollQuery,
+  useVoteElectionMutation,
+  useVotePollMutation
 } from '../../generated/hooks'
-import { ParticularPollScreenProps } from '../../navigator/home.stack'
+import { ParticularElectionScreenProps } from '../../navigator/home.stack'
 import styles from './styles'
 import Loading from '../../components/Loading'
 
-const ParticularPoll = ({ navigation, route }: ParticularPollScreenProps) => {
-  const { data, loading } = useCandidatesOfElectionQuery({
+const ParticularPoll = ({
+  navigation,
+  route
+}: ParticularElectionScreenProps) => {
+  const { data, loading } = useOptionsOnPollQuery({
     variables: { id: route.params.id }
   })
-  const [vote] = useVoteElectionMutation()
+  const [vote] = useVotePollMutation()
 
   const [selectedIndex, setSelectedIndex] = useState<number | undefined>(
     undefined
@@ -45,73 +49,71 @@ const ParticularPoll = ({ navigation, route }: ParticularPollScreenProps) => {
         ) : (
           <>
             <Toolbar
-              title={data.election.description}
+              title={data.poll.description}
               backIcon={BackIcon}
               onBackPress={navigation.goBack}
             />
             <Divider />
             <View style={styles.safeArea}>
-              <Title
-                title={data.election.description}
-                subtitle={`${moment(data.election.start).format(
-                  'L'
-                )} - ${moment(data.election.end).format('L')}`}
-              />
-              <Text style={styles.choice}> Su elección:</Text>
-              <SafeAreaView style={styles.listView}>
-                <ScrollView style={styles.listView}>
+              <ScrollView>
+                <Title
+                  title={data.poll.description}
+                  subtitle={`${moment(data.poll.start).format('L')} - ${moment(
+                    data.poll.end
+                  ).format('L')}`}
+                />
+                <Text style={styles.choice}> Su elección:</Text>
+                <SafeAreaView style={styles.listView}>
                   <RadioGroup
                     selectedIndex={selectedIndex}
                     onChange={onCheckedChange}>
-                    {data.election.candidates.map(candidate => (
+                    {data.poll.options.map(option => (
                       <Radio
                         textStyle={styles.radioTextStyle}
-                        text={`${candidate.firstName} ${candidate.lastName}`}
-                        key={candidate.id}
+                        text={`${option.text}`}
+                        key={option.id}
                         status="warning"
                         style={styles.radio}
                       />
                     ))}
                   </RadioGroup>
-                </ScrollView>
-              </SafeAreaView>
-              <View style={styles.bottomButton}>
-                {/* <Button
+                </SafeAreaView>
+                <View style={styles.bottomButton}>
+                  {/* <Button
               onPress={() => setValidate(prev => !prev)}
               style={styles.buttonLeft}
               size="giant">
               Validar mi elección
             </Button> */}
-                <Button
-                  onPress={async () => {
-                    const candidateId =
-                      selectedIndex &&
-                      data.election.candidates[selectedIndex].id
-                    try {
-                      const response = await vote({
+                  <Button
+                    onPress={async () => {
+                      const candidateId = data.poll.options[selectedIndex].id
+                      const { errors } = await vote({
                         variables: {
                           input: {
-                            candidates: [candidateId as string],
-                            election: route.params.id
+                            options: [candidateId as string],
+                            poll: route.params.id
                           }
                         }
                       })
-                      setModal(true)
-                    } catch (error) {
-                      return <></>
-                    }
-                  }}
-                  disabled={selectedIndex === undefined}
-                  style={styles.buttonRight}
-                  size="giant">
-                  VOTAR
-                </Button>
-              </View>
-              <Modal
-                visible={modal}
-                title="Gracias por su participación"
-                subtitle="Su voto ha sido enviado"
-              />
+                      if (errors) {
+                        console.warn(errors, { depth: Infinity })
+                      } else {
+                        setModal(true)
+                      }
+                    }}
+                    disabled={selectedIndex === undefined}
+                    style={styles.buttonRight}
+                    size="giant">
+                    VOTAR
+                  </Button>
+                </View>
+                <Modal
+                  visible={modal}
+                  title="Gracias por su participación"
+                  subtitle="Su voto ha sido enviado"
+                />
+              </ScrollView>
             </View>
           </>
         )}

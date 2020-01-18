@@ -18,6 +18,7 @@
     "@react-navigation/bottom-tabs": "^5.0.0-alpha.25",
     "@react-navigation/drawer": "^5.0.0-alpha.23",
     "@react-navigation/native": "^5.0.0-alpha.18",
+    "@react-navigation/routers": "^5.0.0-alpha.25",
     "@react-navigation/stack": "^5.0.0-alpha.43",
     "@types/react-native-svg-charts": "^5.0.3",
     "@ui-kitten/components": "4.3.1",
