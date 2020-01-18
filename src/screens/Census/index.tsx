@@ -24,7 +24,9 @@ export type CensoProps = {
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
 
 const Census = ({ navigation }: CensusScreenProps) => {
-  const { data, loading } = usePastElectionResultsQuery()
+  const { data, loading } = usePastElectionResultsQuery({
+    fetchPolicy: 'no-cache'
+  })
   return (
     <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
       <Toolbar

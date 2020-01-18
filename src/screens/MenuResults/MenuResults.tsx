@@ -19,7 +19,9 @@ import Loading from '../../components/Loading'
 const renderItemAccessory = () => <Image source={image} style={styles.image} />
 
 const MenuResults = ({ navigation }: ResultsScreenProps) => {
-  const { data, loading } = usePastElectionResultsQuery()
+  const { data, loading } = usePastElectionResultsQuery({
+    fetchPolicy: 'no-cache'
+  })
 
   return (
     <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
