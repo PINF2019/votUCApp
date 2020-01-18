@@ -37,7 +37,6 @@ const randomColor = (name, lastname) => {
   ]
 
   const letra = colors[alphabetPosition(name.charAt(0)) % 9]
-  console.log(letra)
   return `rgba(${letra[0]},${letra[1]},${letra[2]},1)`
 }
 

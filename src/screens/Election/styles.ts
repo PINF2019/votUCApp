@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   },
   buttonRight: {
     backgroundColor: colorBlue,
-    marginTop: 10
+    marginBottom: 30,
+    marginTop: -10
   },
   choice: {
     color: colorOrange,

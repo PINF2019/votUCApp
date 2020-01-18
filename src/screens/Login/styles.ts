@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   formContainer: { alignItems: 'center', flex: 3 },
   inputsContainer: {
     alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'space-around',
     width: '80%'
   },
@@ -22,13 +23,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   login: {
+    alignContent: 'center',
     backgroundColor: colorLogin,
     borderColor: colorLogin,
     borderRadius: 15,
+    flexDirection: 'row',
     marginTop: '10%',
     width: '50%'
   },
   loginText: {
+    alignSelf: 'center',
     color: whiteText
   },
   passwordContainer: {

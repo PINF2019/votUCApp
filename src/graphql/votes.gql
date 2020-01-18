@@ -29,6 +29,23 @@ query pendingElectionsToVote{
   }
 }
 
+query OptionsOnPoll($id: ID!) {
+  poll(id: $id) {
+    start
+    end
+    description
+    options{
+      id
+      text
+    }
+  }
+}
+
 mutation voteElection($input: VoteElectionInput!) {
   voteOnElection(input: $input)
 }
+
+mutation votePoll($input: VotePollInput!) {
+  voteOnPoll(input: $input)
+}
+

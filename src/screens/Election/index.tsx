@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
 })
 
 const Votes = ({ navigation }: VotesScreenProps) => {
-  const { data, loading } = usePastElectionsQuery()
-  const electionsAndPolls = data?.pendingElectoralProcesses
+  const { data, loading } = usePastElectionsQuery({ fetchPolicy: 'no-cache' })
   return (
     <SafeAreaLayout style={styles.areaLayout} insets={SaveAreaInset.TOP}>
       {loading ? (
@@ -71,8 +70,8 @@ const Votes = ({ navigation }: VotesScreenProps) => {
           </View>
 
           <View style={styles.spaceList}>
-            {data?.pendingElectoralProcesses ? (
-              electionsAndPolls?.map((elecOrPoll, idk) => {
+            {data?.pendingElectoralProcesses.length > 0 ? (
+              data.pendingElectoralProcesses.map((elecOrPoll, idk) => {
                 return (
                   <ListItem
                     key={idk}
@@ -100,7 +99,15 @@ const Votes = ({ navigation }: VotesScreenProps) => {
               })
             ) : (
               <View style={styles.container}>
-                <Text>No tiene votaciones pendientes</Text>
+                <Text
+                  style={{
+                    fontStyle: 'italic',
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: 'grey'
+                  }}>
+                  No tiene votaciones pendientes
+                </Text>
               </View>
             )}
           </View>

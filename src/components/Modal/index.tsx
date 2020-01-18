@@ -6,7 +6,7 @@ import {
   Text
 } from '@ui-kitten/components'
 import React, { useState, useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { CommonActions, useNavigation } from '@react-navigation/native'
 import styles from './style'
 import image from '../../assets/logo_mail.png'
 import { Routes } from '../../navigator'
@@ -19,10 +19,15 @@ type ModalProps = {
 
 const Modal = ({ title, subtitle, visible }: ModalProps) => {
   const [isVisible, setVisible] = useState(visible)
+  const { dispatch } = useNavigation()
+
+  const resetAction = CommonActions.reset({
+    index: 0,
+    routes: [{ name: Routes.CENSUS }]
+  })
   useEffect(() => {
     setVisible(visible)
   }, [visible])
-  const { navigate } = useNavigation()
   return (
     <KModal allowBackdrop backdropStyle={styles.backdrop} visible={isVisible}>
       <Layout level="3" style={styles.modalContainer}>
@@ -36,7 +41,7 @@ const Modal = ({ title, subtitle, visible }: ModalProps) => {
         <Button
           onPress={() => {
             setVisible(false)
-            navigate(Routes.CENSUS)
+            dispatch(resetAction)
           }}
           style={styles.button}
           status="warning"
