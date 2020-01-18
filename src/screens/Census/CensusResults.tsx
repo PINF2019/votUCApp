@@ -58,11 +58,6 @@ const CensusResults = ({ navigation, route }: CensusResultsScreenProps) => {
                 data?.election.end
               ).format('L')}`}
             />
-            {/* <Title
-              title={`Censo de ${data?.election.description}`}
-              subtitle=""
-            /> */}
-
             <View style={styles.items}>
               <View>
                 <Text style={styles.title}>Secretario: </Text>
