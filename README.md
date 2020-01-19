@@ -120,3 +120,13 @@ Routing and navigation for your React Native apps
 ### [Async Storage](https://github.com/react-native-community/async-storage)
 
 An asynchronous, persistent, key-value storage system for React Native.
+
+
+### [UI Kitten](https://akveo.github.io/react-native-ui-kitten/)
+
+React Native framework for creating stunning cross-platform mobile applications. Design system based, brings your product from MVP to enterprise. Forever Open Source and free!
+
+
+### [UI Kitten](https://github.com/JesperLekland/react-native-svg-charts)
+
+One library to rule all charts for React Native 
