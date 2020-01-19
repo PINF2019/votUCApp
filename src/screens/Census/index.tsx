@@ -1,20 +1,20 @@
-import { Divider, Layout, ListItem, Text } from '@ui-kitten/components'
+import { Divider, Layout, ListItem } from '@ui-kitten/components'
+import moment from 'moment'
 import React from 'react'
 import { Image, View } from 'react-native'
-import moment from 'moment'
 import { MenuIcon } from '../../assets/icons'
+import image from '../../assets/triangulo.png'
+import Loading from '../../components/Loading'
 import {
   SafeAreaLayout,
   SaveAreaInset
 } from '../../components/safe-area-layout'
-import { Toolbar } from '../../components/Toolbar'
-import { CensusScreenProps } from '../../navigator/home.stack'
 import Title from '../../components/Title'
-import styles from './style'
-import image from '../../assets/triangulo.png'
-import { Routes } from '../../navigator'
+import { Toolbar } from '../../components/Toolbar'
 import { usePastElectionResultsQuery } from '../../generated/hooks'
-import Loading from '../../components/Loading'
+import { Routes } from '../../navigator'
+import { CensusScreenProps } from '../../navigator/home.stack'
+import styles from './style'
 
 export type CensoProps = {
   title: string

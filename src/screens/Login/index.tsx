@@ -29,7 +29,7 @@ const validationLogin = yup.object().shape({
 
 const Login = () => {
   const { signIn } = useAuth()
-  const [login, { loading }] = useLoginMutation()
+  const [login] = useLoginMutation()
   const { navigate } = useNavigation()
 
   return (
@@ -38,13 +38,12 @@ const Login = () => {
         initialValues={{ uid: '', password: '' }}
         validationSchema={validationLogin}
         onSubmit={async (input, actions) => {
-          try {
-            const { data } = await login({ variables: { input } })
-            if (data && !loading) {
-              signIn(data.login.accessToken)
-              navigate(Routes.AUTH)
-            }
-          } catch (e) {
+          const { data, errors } = await login({ variables: { input } })
+          if (data) {
+            await signIn(data.login.accessToken)
+            navigate(Routes.AUTH)
+          }
+          if (errors) {
             const message = 'Usuario o Contraseña Incorrectos'
             actions.setErrors({ password: message })
           }
@@ -106,9 +105,6 @@ const Login = () => {
                 </Text>
               </View>
             </View>
-            <Modal visible={loading}>
-              <Spinner size="giant" />
-            </Modal>
           </ImageBackground>
         )}
       </Formik>

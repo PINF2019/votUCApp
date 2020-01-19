@@ -24,8 +24,8 @@ type TokenDTO = {
 }
 
 type AuthContextType = {
-  signIn: (token: string) => void
-  signOut: () => void
+  signIn: (token: string) => Promise<void>
+  signOut: () => Promise<void>
   isLoading: boolean
   userToken: string | null | undefined
 }
