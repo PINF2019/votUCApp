@@ -1,0 +1,32 @@
+query PastElectionResults {
+  electoralProcesses(finished: true) {
+    ... on Election {
+      id
+      start
+      end
+      description
+    }
+  }
+}
+
+query CensusData($id: ID!){
+  election(id: $id){
+    description
+    start
+    end
+    secretary {
+        firstName
+        lastName
+      }
+      delegates {
+        firstName
+        lastName
+      }
+      censuses{
+        voters{
+          firstName
+          lastName
+        }
+      }
+  }
+}
